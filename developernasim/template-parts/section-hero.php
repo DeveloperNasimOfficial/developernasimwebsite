@@ -29,7 +29,7 @@ $portrait = dn_mod( 'portrait' );
 			<div class="hero__copy" data-reveal style="--d:.5s">
 				<p class="lead"><?php echo esc_html( dn_mod( 'hero_text' ) ); ?></p>
 				<div class="hero__ctas">
-					<a class="btn btn--brand btn--lg" href="<?php echo esc_url( dn_contact_url() ); ?>" data-magnetic>
+					<a class="btn btn--brand btn--lg" href="<?php echo esc_url( dn_audit_url() ); ?>" data-magnetic>
 						<span><?php echo esc_html( dn_mod( 'hero_cta_label' ) ); ?></span><?php echo dn_icon( 'arrow-ur' ); // phpcs:ignore ?>
 					</a>
 					<a class="btn btn--ghost btn--lg" href="#work">

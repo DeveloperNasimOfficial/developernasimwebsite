@@ -16,6 +16,7 @@ require DN_DIR . '/inc/helpers.php';
 require DN_DIR . '/inc/mockups.php';
 require DN_DIR . '/inc/post-types.php';
 require DN_DIR . '/inc/customizer.php';
+require DN_DIR . '/inc/audit.php';
 
 /**
  * Theme supports & menus.
@@ -188,9 +189,13 @@ function dn_fallback_menu() {
 		'#about'    => __( 'About', 'developernasim' ),
 		'#faq'      => __( 'FAQ', 'developernasim' ),
 	);
+	$audit = function_exists( 'dn_audit_url' ) ? dn_audit_url() : '';
 	echo '<ul class="nav__list">';
 	foreach ( $items as $hash => $label ) {
 		printf( '<li><a href="%s">%s</a></li>', esc_url( $base . $hash ), esc_html( $label ) );
+	}
+	if ( $audit ) {
+		printf( '<li class="nav__audit"><a href="%s">%s</a></li>', esc_url( $audit ), esc_html__( 'Free audit', 'developernasim' ) );
 	}
 	echo '</ul>';
 }

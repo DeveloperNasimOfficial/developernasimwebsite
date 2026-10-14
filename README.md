@@ -29,6 +29,17 @@ Until you publish your first project, the homepage shows four designed **Concept
 
 **Testimonials → Add new** works the same way: the title is the client name and the content is the quote. Until you add some, the two quotes from your Upwork profile are shown.
 
+## Free website audit page
+
+The page at **`/free-website-audit/`** is created automatically when you activate the theme. It has a full request form: name, email, website, goals, business type, builder, the problem and a timeline.
+
+- **Where requests go:** each one is saved under **Audit requests** in wp-admin and emailed to you. Set the address in **Customize → Developer Nasim → Offer & call to action → Send audit requests to**. If that's empty it uses your Contact email, then the site admin email.
+- **The client** gets an automatic confirmation email. Change the promised delivery time ("2 business days") in the same Customizer section.
+- **Spam protection** is built in: a hidden honeypot field, a minimum time to fill the form, a security token and a limit of 5 requests per hour per visitor. No plugin is needed.
+- **Email delivery:** many hosts send WordPress mail poorly. Install an SMTP plugin (e.g. *WP Mail SMTP*) so notifications reach your inbox. Requests are always saved in wp-admin either way.
+- The homepage "Get a free Loom audit" buttons and the nav's "Free audit" link point to this page.
+- If you build a custom menu under Appearance → Menus, add the "Free Website Audit" page to it.
+
 ## What's inside
 
 | Section | Notes |

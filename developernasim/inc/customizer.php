@@ -60,6 +60,8 @@ function dn_customize_register( $wp_customize ) {
 				'cta_title'   => array( 'Final CTA title (*accent*)', 'text' ),
 				'cta_text'    => array( 'Final CTA text', 'textarea' ),
 				'footer_note' => array( 'Footer tagline', 'text' ),
+				'audit_email'      => array( 'Send audit requests to (empty = Email above, then site admin email)', 'email' ),
+				'audit_turnaround' => array( 'Audit delivery time (e.g. "2 business days")', 'text' ),
 			),
 		),
 		'dn_contact' => array(

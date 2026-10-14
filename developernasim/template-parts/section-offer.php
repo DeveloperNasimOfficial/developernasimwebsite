@@ -14,7 +14,7 @@
 				<p class="eyebrow eyebrow--light"><span class="dot"></span><?php esc_html_e( 'Free website audit', 'developernasim' ); ?></p>
 				<h2 class="h2"><?php echo esc_html( dn_mod( 'offer_title' ) ); ?></h2>
 				<p class="offer__text"><?php echo esc_html( dn_mod( 'offer_text' ) ); ?></p>
-				<a class="btn btn--light btn--lg" href="<?php echo esc_url( dn_contact_url() ); ?>" data-magnetic>
+				<a class="btn btn--light btn--lg" href="<?php echo esc_url( dn_audit_url() ); ?>" data-magnetic>
 					<span><?php esc_html_e( 'Request my free Loom audit', 'developernasim' ); ?></span><?php echo dn_icon( 'arrow-ur' ); // phpcs:ignore ?>
 				</a>
 			</div>

@@ -140,6 +140,79 @@
 	}
 	if (clocks.length) { tick(); setInterval(tick, 30000); }
 
+	/* Audit form: validate + submit without reload ------------------- */
+	var form = document.querySelector('[data-audit-form]');
+	if (form && window.fetch && window.FormData) {
+		var success = document.querySelector('[data-audit-success]');
+		var formError = form.querySelector('[data-form-error]');
+		var submit = form.querySelector('[type="submit"]');
+
+		var setError = function (name, message) {
+			var slot = form.querySelector('[data-error-for="' + name + '"]');
+			if (!slot) { return; }
+			slot.textContent = message || '';
+			slot.closest('.field').classList.toggle('has-error', !!message);
+		};
+
+		var validate = function () {
+			var errors = {};
+			var name = form.elements.name.value.trim();
+			var email = form.elements.email.value.trim();
+			var site = form.elements.website.value.trim().replace(/^https?:\/\//i, '');
+			if (name.length < 2) { errors.name = 'Please tell me your name.'; }
+			if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errors.email = 'Please enter a valid email address.'; }
+			if (!/^[^\s\/]+\.[^\s\/]{2,}/.test(site)) { errors.website = 'Please enter your website address, e.g. yourbusiness.com'; }
+			['name', 'email', 'website'].forEach(function (k) { setError(k, errors[k]); });
+			return errors;
+		};
+
+		// Strip a pasted "https://" since the prefix is already shown.
+		form.elements.website.addEventListener('blur', function () {
+			this.value = this.value.trim().replace(/^https?:\/\//i, '').replace(/\/$/, '');
+		});
+		['name', 'email', 'website'].forEach(function (k) {
+			form.elements[k].addEventListener('input', function () {
+				if (this.closest('.field').classList.contains('has-error')) { validate(); }
+			});
+		});
+
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			formError.hidden = true;
+			var errors = validate();
+			var first = Object.keys(errors)[0];
+			if (first) { form.elements[first].focus(); return; }
+
+			var data = new FormData(form);
+			data.append('dn_ajax', '1');
+			submit.classList.add('is-loading');
+
+			fetch(form.getAttribute('action'), { method: 'POST', body: data, credentials: 'same-origin' })
+				.then(function (res) { return res.json().catch(function () { return { success: false }; }); })
+				.then(function (json) {
+					submit.classList.remove('is-loading');
+					if (json && json.success) {
+						form.hidden = true;
+						success.hidden = false;
+						success.focus();
+						success.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+						return;
+					}
+					var errs = (json && json.data && json.data.errors) || {};
+					Object.keys(errs).forEach(function (k) { setError(k, errs[k]); });
+					if (errs.form || !Object.keys(errs).length) {
+						formError.textContent = errs.form || 'Something went wrong. Please try again.';
+						formError.hidden = false;
+					}
+				})
+				.catch(function () {
+					submit.classList.remove('is-loading');
+					formError.textContent = 'Network error. Please check your connection and try again.';
+					formError.hidden = false;
+				});
+		});
+	}
+
 	/* Pointer-only effects ------------------------------------------ */
 	if (!finePointer || reduce) { return; }
 

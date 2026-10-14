@@ -67,6 +67,8 @@ function dn_defaults() {
 		'github_url'       => '',
 		'x_url'            => '',
 		'youtube_url'      => 'https://youtu.be/33tk2ZLAB0s',
+		'audit_email'      => '',
+		'audit_turnaround' => '2 business days',
 		'footer_note'      => 'Structure first. Design second. Results always.',
 	);
 }
