@@ -39,6 +39,8 @@ The page at **`/free-website-audit/`** is created automatically when you activat
 - **Email delivery:** many hosts send WordPress mail poorly. Install an SMTP plugin (e.g. *WP Mail SMTP*) so notifications reach your inbox. Requests are always saved in wp-admin either way.
 - The homepage "Get a free Loom audit" buttons and the nav's "Free audit" link point to this page.
 - If you build a custom menu under Appearance → Menus, add the "Free Website Audit" page to it.
+- **The link never 404s:** the theme serves the audit page even if the WordPress page is missing, in the Trash or saved as a draft. With "Plain" permalinks the links switch to `/?dn_audit=1` automatically.
+- **Still seeing a 404?** Clear your caching plugin / Cloudflare cache, and go to **Settings → Permalinks** and click **Save** once.
 
 ## What's inside
 

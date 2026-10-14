@@ -56,8 +56,14 @@ function dn_audit_options() {
  * Public URL of the audit page.
  */
 function dn_audit_url() {
-	$page = get_page_by_path( DN_AUDIT_SLUG );
-	return $page ? get_permalink( $page ) : home_url( '/' . DN_AUDIT_SLUG . '/' );
+	$page = get_page_by_path( DN_AUDIT_SLUG, OBJECT, 'page' );
+	if ( $page && 'publish' === $page->post_status ) {
+		return get_permalink( $page );
+	}
+	if ( get_option( 'permalink_structure' ) ) {
+		return home_url( '/' . DN_AUDIT_SLUG . '/' );
+	}
+	return add_query_arg( 'dn_audit', '1', home_url( '/' ) );
 }
 
 /**
@@ -79,14 +85,49 @@ function dn_audit_ensure_page() {
 }
 add_action( 'after_switch_theme', 'dn_audit_ensure_page' );
 
-function dn_audit_maybe_create_page() {
-	if ( get_option( 'dn_audit_page_v1' ) ) {
+// Theme updates via "Replace current with uploaded" don't fire after_switch_theme,
+// so re-check on every admin load (one cached query).
+add_action( 'admin_init', 'dn_audit_ensure_page' );
+
+/**
+ * Serve the audit page even when no WordPress page exists for it
+ * (not created yet, deleted, trashed or left as a draft) so the link never 404s.
+ */
+function dn_audit_query_vars( $vars ) {
+	$vars[] = 'dn_audit';
+	return $vars;
+}
+add_filter( 'query_vars', 'dn_audit_query_vars' );
+
+function dn_audit_is_request() {
+	if ( get_query_var( 'dn_audit' ) ) {
+		return true;
+	}
+	$path = trim( (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH ), '/' ); // phpcs:ignore
+	$base = trim( (string) wp_parse_url( home_url(), PHP_URL_PATH ), '/' );
+	if ( $base && 0 === strpos( $path, $base . '/' ) ) {
+		$path = substr( $path, strlen( $base ) + 1 );
+	}
+	return DN_AUDIT_SLUG === rawurldecode( $path );
+}
+
+function dn_audit_virtual_page() {
+	if ( is_admin() || ! ( is_404() || get_query_var( 'dn_audit' ) ) || ! dn_audit_is_request() ) {
 		return;
 	}
-	dn_audit_ensure_page();
-	update_option( 'dn_audit_page_v1', 1 );
+	global $wp_query;
+	$wp_query->is_404  = false;
+	$wp_query->is_home = false;
+	$wp_query->is_page = true;
+	$GLOBALS['dn_audit_virtual'] = true;
+	status_header( 200 );
+	add_filter( 'document_title_parts', fn( $parts ) => array_merge( $parts, array( 'title' => __( 'Free Website Audit', 'developernasim' ) ) ) );
+	add_filter( 'body_class', fn( $classes ) => array_merge( array_diff( $classes, array( 'error404', 'home', 'blog', 'is-home' ) ), array( 'page', 'page-free-website-audit' ) ) );
+	include locate_template( 'page-free-website-audit.php' );
+	exit;
 }
-add_action( 'admin_init', 'dn_audit_maybe_create_page' );
+// Priority 1: before redirect_canonical() tries to "guess" a different URL.
+add_action( 'template_redirect', 'dn_audit_virtual_page', 1 );
 
 /**
  * Stored requests (private, admin only).
