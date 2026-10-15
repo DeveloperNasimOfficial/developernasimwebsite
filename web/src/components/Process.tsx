@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { process } from "@/data/site";
+import { processSteps } from "@/data/site";
 import { ArrowUR } from "./Icons";
 
 export default function Process() {
   return (
-    <section className="section process" id="process">
+    <section className="section process" id="process" data-nav="dark">
       <div className="wrap process__grid">
         <div className="process__head">
           <p className="eyebrow">How I work</p>
@@ -13,7 +13,7 @@ export default function Process() {
           <Link href="/free-website-audit/" className="btn btn--brand" data-reveal>Start with a free audit <ArrowUR /></Link>
         </div>
         <ol>
-          {process.map((step, i) => (
+          {processSteps.map((step, i) => (
             <li className="step" key={step.title} data-reveal>
               <span className="step__n">{String(i + 1).padStart(2, "0")}</span>
               <div>

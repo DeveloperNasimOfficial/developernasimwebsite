@@ -98,7 +98,7 @@ uniform vec3 uColor; varying float vAlpha;
 void main(){
   float d=length(gl_PointCoord-0.5);
   float a=smoothstep(0.5,0.0,d);
-  gl_FragColor=vec4(uColor,a*vAlpha*0.85);
+  gl_FragColor=vec4(uColor,a*vAlpha*0.55);
 }`;
 
 function hasWebGL() {
@@ -171,8 +171,7 @@ export default function HeroScene() {
       fragmentShader: pointsFragment,
       transparent: true,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      uniforms: { uTime: { value: 0 }, uPixel: { value: renderer.getPixelRatio() }, uColor: { value: new THREE.Color("#a9b6ff") } },
+      uniforms: { uTime: { value: 0 }, uPixel: { value: renderer.getPixelRatio() }, uColor: { value: new THREE.Color("#3b5bff") } },
     });
     const points = new THREE.Points(pGeo, pMat);
     scene.add(points);

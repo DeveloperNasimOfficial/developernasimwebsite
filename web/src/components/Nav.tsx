@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { site } from "@/data/site";
 import { ArrowUR } from "./Icons";
 
@@ -50,9 +50,27 @@ export default function Nav() {
 
   useEffect(() => setOpen(false), [pathname]);
 
+  // Light nav text while the bar sits over a dark section (marked data-nav="dark").
+  const [onDark, setOnDark] = useState(false);
+  useEffect(() => {
+    const active = new Set<Element>();
+    const triggers = Array.from(document.querySelectorAll('[data-nav="dark"]')).map((el) =>
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 40px",
+        end: "bottom 40px",
+        onToggle: (self) => {
+          if (self.isActive) active.add(el); else active.delete(el);
+          setOnDark(active.size > 0);
+        },
+      })
+    );
+    return () => { triggers.forEach((t) => t.kill()); setOnDark(false); };
+  }, [pathname]);
+
   return (
     <>
-      <header className="nav">
+      <header className={`nav${onDark || open ? " is-on-dark" : ""}`}>
         <Link href="/" className="nav__brand" aria-label={site.name}>
           <span>{site.short.toLowerCase()}<i>.</i></span>
         </Link>

@@ -2,7 +2,7 @@ import { certificates, experience } from "@/data/site";
 
 export default function Experience() {
   return (
-    <section className="section xp-section" id="experience">
+    <section className="section xp-section" id="experience" data-nav="dark">
       <div className="wrap">
         <p className="eyebrow" style={{ marginBottom: 24 }}>Experience</p>
         <h2 className="h2" data-split>9 companies. <span className="serif" style={{ color: "var(--brand)" }}>One focus.</span></h2>

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export const viewport: Viewport = { themeColor: "#08080a" };
+export const viewport: Viewport = { themeColor: "#ffffff" };
 
 const personLd = {
   "@context": "https://schema.org",

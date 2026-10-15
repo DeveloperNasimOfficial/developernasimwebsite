@@ -72,7 +72,14 @@ npm run build    # outputs the static site to /out
 The included `.htaccess` (from `public/.htaccess`) forces HTTPS, shows the custom 404 page, sets browser caching and gzip, and redirects old WordPress URLs to the homepage.
 To update the site later: run `npm run build` and upload the new `out/` contents the same way.
 
-**Option B, Vercel (free, recommended):** import the GitHub repo at vercel.com, set **Root Directory** to `web`, and deploy. Then point your domain at Vercel.
+**Automatic publishing to Hostinger (set up once):** `.github/workflows/deploy-hostinger.yml` rebuilds the site and uploads it over FTP on every push that changes `/web`. In GitHub, go to **Settings → Secrets and variables → Actions** and add:
+- `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`: from hPanel → **Files → FTP Accounts**
+- `WEB3FORMS_KEY` (optional): turns on the audit form
+- Variable `FTP_SERVER_DIR` (optional): only needed if your site folder isn't `public_html/`
+
+After that, every change pushed to GitHub goes live in about 2 minutes. You can watch each run in the **Actions** tab.
+
+**Option B, Vercel (free):** import the GitHub repo at vercel.com, set **Root Directory** to `web`, and deploy. Then point your domain at Vercel.
 
 ## Performance & accessibility
 

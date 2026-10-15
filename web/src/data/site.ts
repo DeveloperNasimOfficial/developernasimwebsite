@@ -19,7 +19,8 @@ export const site = {
   },
   // Audit form delivery. Get a free access key at https://web3forms.com
   // (enter the email where requests should arrive). Paste it here.
-  web3formsKey: "",
+  // Or set the WEB3FORMS_KEY secret in GitHub; the deploy workflow passes it in.
+  web3formsKey: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "",
 };
 
 export const hero = {
@@ -85,7 +86,7 @@ export const services = [
   },
 ];
 
-export const process = [
+export const processSteps = [
   { title: "Structure first", text: "Audit, goals and sitemap. I map what visitors need to see, in what order, before a single pixel moves.", meta: "Week 1" },
   { title: "Design second", text: "Wireframes become a polished, on-brand design system: typography, components and responsive layouts.", meta: "Week 1–2" },
   { title: "Build & optimise", text: "Hand-built in WordPress with a backend you can manage, tuned for speed, SEO and security.", meta: "Week 2–4" },

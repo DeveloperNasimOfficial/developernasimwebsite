@@ -1,0 +1,63 @@
+# Builds the Next.js site in /web and uploads it to Hostinger over FTP.
+# Runs automatically on every push that changes /web, or manually from the Actions tab.
+#
+# One-time setup (GitHub repo → Settings → Secrets and variables → Actions):
+#   Secrets:   FTP_SERVER     e.g. ftp.developernasim.com  (hPanel → Files → FTP Accounts)
+#              FTP_USERNAME   e.g. u123456789.developernasim.com
+#              FTP_PASSWORD   your FTP password
+#              WEB3FORMS_KEY  (optional) access key from web3forms.com for the audit form
+#   Variable:  FTP_SERVER_DIR (optional) folder on the server, default "public_html/"
+
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [main, claude/personal-brand-website-s5xpk5]
+    paths: ["web/**", ".github/workflows/deploy-hostinger.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - run: npm ci
+
+      - name: Build static site
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+
+      - name: Check FTP secrets
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        run: |
+          if [ -z "$FTP_SERVER" ]; then
+            echo "::error::FTP secrets are not set yet. Add FTP_SERVER, FTP_USERNAME and FTP_PASSWORD in Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      - name: Upload to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./web/out/
+          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}
+          # Only changed files are uploaded; files it never uploaded (e.g. old WordPress) are left alone.
