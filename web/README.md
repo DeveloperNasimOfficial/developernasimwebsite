@@ -63,7 +63,14 @@ npm run dev      # http://localhost:3000
 npm run build    # outputs the static site to /out
 ```
 
-**Option A, your current hosting (cPanel etc.):** upload the **contents** of `out/` (or `dist/developernasim-nextjs-upload.zip`, extracted) into `public_html`. This replaces the WordPress site, so back it up first.
+**Option A, Hostinger (or any cPanel / hPanel hosting):**
+1. Back up the current site in hPanel: **Websites → Manage → Files → Backups**, or download `public_html` and the database.
+2. Open **File Manager → public_html** and remove the old WordPress files, *including* WordPress's `.htaccess`.
+3. Upload `dist/developernasim-nextjs-upload.zip` into `public_html`, right-click it → **Extract** → extract straight into `public_html`. `index.html` must sit directly in `public_html`, not in a subfolder. Then delete the zip.
+4. hPanel → **Performance → Cache Manager → Purge all**, then open your domain.
+
+The included `.htaccess` (from `public/.htaccess`) forces HTTPS, shows the custom 404 page, sets browser caching and gzip, and redirects old WordPress URLs to the homepage.
+To update the site later: run `npm run build` and upload the new `out/` contents the same way.
 
 **Option B, Vercel (free, recommended):** import the GitHub repo at vercel.com, set **Root Directory** to `web`, and deploy. Then point your domain at Vercel.
 
