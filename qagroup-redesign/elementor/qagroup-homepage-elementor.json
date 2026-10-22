@@ -1,0 +1,4543 @@
+{
+ "title": "QA Group – Homepage (Layout Concept R1)",
+ "type": "page",
+ "version": "0.4",
+ "page_settings": {
+  "hide_title": "yes",
+  "template": "elementor_header_footer"
+ },
+ "content": [
+  {
+   "id": "4d3c1a6",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "QAG Global Styles (CSS + JS)",
+    "content_width": "full",
+    "flex_direction": "column",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    }
+   },
+   "elements": [
+    {
+     "id": "a5cd687",
+     "elType": "widget",
+     "widgetType": "html",
+     "settings": {
+      "html": "<style>\n/* QA Group homepage: smoother Elementor entrance animations */\n@keyframes qagFadeUp{from{opacity:0;transform:translate3d(0,40px,0)}to{opacity:1;transform:none}}\n@keyframes qagFade{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}\n.elementor-element.animated.fadeInUp{animation-name:qagFadeUp;animation-duration:1.1s;animation-timing-function:cubic-bezier(.22,1,.36,1)}\n.elementor-element.animated.fadeIn{animation-name:qagFade;animation-duration:1.4s;animation-timing-function:cubic-bezier(.22,1,.36,1)}\n@media (prefers-reduced-motion:reduce){.elementor-element.animated{animation:none!important}}\n\n/* hero: content sits bottom-left over the slideshow */\n.qag-hero .elementor-background-slideshow::after{content:\"\";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 45%,rgba(0,0,0,.7) 100%),linear-gradient(90deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 60%)}\n\n/* client logos: grayscale until hover */\n.qag-client img{filter:grayscale(1);opacity:.7;transition:filter .4s,opacity .4s}\n.qag-client img:hover{filter:none;opacity:1}\n\n/* intro: photo on the left follows the open accordion item */\n.qag-intro-media{position:relative;min-height:460px}\n.qag-intro-media>.elementor-widget-image{position:absolute!important;inset:0;width:100%!important;opacity:0;transition:opacity .8s cubic-bezier(.22,1,.36,1)}\n.qag-intro-media>.elementor-widget-image.is-active{opacity:1}\n.qag-intro-media>.elementor-widget-image img{width:100%;height:100%!important;object-fit:cover}\n.qag-intro-media>.elementor-widget-image .elementor-widget-container{height:100%}\nbody.elementor-editor-active .qag-intro-media>.elementor-widget-image{position:relative!important;opacity:1;height:200px;margin-bottom:10px}\n@media (max-width:767px){.qag-intro-media{min-height:260px}}\n.qag-intro-acc .e-n-accordion-item{border-bottom:1px solid rgba(28,25,21,.12)}\n.qag-intro-acc .e-n-accordion-item:first-child{border-top:1px solid rgba(28,25,21,.12)}\n.qag-intro-acc{counter-reset:qi}\n.qag-intro-acc .e-n-accordion-item-title-text::before{counter-increment:qi;content:counter(qi,decimal-leading-zero);display:inline-block;width:44px;font:500 12px/1 Inter,sans-serif;letter-spacing:.12em;color:#b28b4c;vertical-align:middle}\n.qag-intro-acc a{color:#534132;border-bottom:1px solid #b28b4c}\n\n/* industry tiles: zoom the photo, keep the label on top */\n.qag-tile{position:relative;overflow:hidden;isolation:isolate}\n.qag-tile::after{content:\"\";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.72) 100%);transition:background .5s}\n.qag-tile:hover::after{background:linear-gradient(180deg,rgba(83,65,50,.15) 0%,rgba(43,34,27,.85) 100%)}\n.qag-tile>.elementor-element{position:relative;z-index:1}\n.qag-tile{transition:background-size .9s cubic-bezier(.22,1,.36,1)}\n.qag-tile:hover{background-size:112%!important}\n\n/* why-choose: thin rules between the three points */\n.qag-feat{border-top:1px solid rgba(28,25,21,.12)}\n@media (min-width:1025px){.qag-feat+.qag-feat{border-left:1px solid rgba(28,25,21,.12)}}\n\n/* project list: numbered two-column list */\n.qag-work-list .elementor-icon-list-items{column-count:2;column-gap:40px;counter-reset:w}\n@media (max-width:767px){.qag-work-list .elementor-icon-list-items{column-count:1}}\n.qag-work-list .elementor-icon-list-item{break-inside:avoid;counter-increment:w;padding:15px 10px!important;border-bottom:1px solid rgba(255,255,255,.12);transition:background .35s,padding .35s}\n.qag-work-list .elementor-icon-list-item::before{content:counter(w,decimal-leading-zero);font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:#b28b4c;width:34px;flex:none;align-self:center}\n.qag-work-list .elementor-icon-list-item:hover{background:rgba(178,139,76,.08);padding-left:16px!important}\n.qag-work-list .elementor-icon-list-icon{display:none}\n.qag-work-illo img{filter:invert(1) brightness(1.6) sepia(.25);mix-blend-mode:screen;opacity:.9}\n</style>\n<script>\ndocument.addEventListener('DOMContentLoaded',function(){\n  var media=document.querySelectorAll('.qag-intro-media>.elementor-widget-image');\n  var acc=document.querySelector('.qag-intro-acc');\n  if(!media.length||!acc)return;\n  function sync(){\n    var items=acc.querySelectorAll('details.e-n-accordion-item'),open=0;\n    items.forEach(function(d,i){if(d.open)open=i});\n    media.forEach(function(m,i){m.classList.toggle('is-active',i===open)});\n  }\n  acc.addEventListener('toggle',function(){setTimeout(sync,20)},true);\n  acc.addEventListener('click',function(){setTimeout(sync,60)});\n  sync();\n});\n</script>",
+      "_title": "QAG Global CSS & JS",
+      "_margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      }
+     },
+     "elements": []
+    }
+   ]
+  },
+  {
+   "id": "bb3b93f",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "1. Hero",
+    "content_width": "boxed",
+    "flex_direction": "column",
+    "padding": {
+     "unit": "px",
+     "top": "140",
+     "right": "40",
+     "bottom": "80",
+     "left": "40",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "boxed_width": {
+     "unit": "px",
+     "size": 1480,
+     "sizes": []
+    },
+    "css_classes": "qag-hero",
+    "min_height": {
+     "unit": "vh",
+     "size": 100,
+     "sizes": []
+    },
+    "min_height_mobile": {
+     "unit": "vh",
+     "size": 88,
+     "sizes": []
+    },
+    "flex_justify_content": "flex-end",
+    "flex_align_items": "flex-start",
+    "padding_tablet": {
+     "unit": "px",
+     "top": "120",
+     "right": "32",
+     "bottom": "64",
+     "left": "32",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "110",
+     "right": "20",
+     "bottom": "48",
+     "left": "20",
+     "isLinked": false
+    },
+    "background_background": "slideshow",
+    "background_slideshow_gallery": [
+     {
+      "id": "",
+      "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/05/homepage-slideshow-1-min.webp"
+     },
+     {
+      "id": "",
+      "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/05/homepage-slideshow-4-min.webp"
+     },
+     {
+      "id": "",
+      "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/05/homepage-slideshow-3-min.webp"
+     }
+    ],
+    "background_slideshow_loop": "yes",
+    "background_slideshow_slide_duration": 5000,
+    "background_slideshow_slide_transition": "fade",
+    "background_slideshow_transition_duration": 1200,
+    "background_slideshow_background_size": "cover",
+    "background_slideshow_background_position": "center center",
+    "background_slideshow_ken_burns": "yes",
+    "background_slideshow_ken_burns_zoom_direction": "in",
+    "background_color": "#2B221B"
+   },
+   "elements": [
+    {
+     "id": "3031d02",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Hero Text",
+      "content_width": "full",
+      "flex_direction": "column",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "width": {
+       "unit": "px",
+       "size": 720,
+       "sizes": []
+      },
+      "width_mobile": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "z_index": 2
+     },
+     "elements": [
+      {
+       "id": "ca264e1",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Could custom furniture be designed to meet society’s changing standards?",
+        "header_size": "h1",
+        "title_color": "#FFFFFF",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Brandon Grotesque",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 68,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_tablet": {
+         "unit": "px",
+         "size": 52,
+         "sizes": []
+        },
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 36,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.04,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 200
+       },
+       "elements": []
+      },
+      {
+       "id": "18b8ffa",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Architectural upholstery has the power to unite and inspire. Can we measure comfort and quality per square foot?</p>",
+        "text_color": "rgba(255,255,255,0.9)",
+        "_margin": {
+         "unit": "px",
+         "top": "22",
+         "right": "0",
+         "bottom": "30",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Inter",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 18,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 15,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.6,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 400
+       },
+       "elements": []
+      },
+      {
+       "id": "25165e6",
+       "elType": "widget",
+       "widgetType": "button",
+       "settings": {
+        "text": "View Our Portfolio",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/services/portfolio/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "size": "md",
+        "selected_icon": {
+         "value": "fas fa-arrow-right",
+         "library": "fa-solid"
+        },
+        "icon_align": "right",
+        "icon_indent": {
+         "unit": "px",
+         "size": 10,
+         "sizes": []
+        },
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "1",
+         "bottom": "1",
+         "left": "1",
+         "isLinked": false
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "text_padding": {
+         "unit": "px",
+         "top": "16",
+         "right": "28",
+         "bottom": "16",
+         "left": "28",
+         "isLinked": false
+        },
+        "hover_animation": "",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Inter",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 13,
+         "sizes": []
+        },
+        "typography_font_weight": "500",
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 12,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1,
+         "sizes": []
+        },
+        "typography_letter_spacing": {
+         "unit": "px",
+         "size": 1.6,
+         "sizes": []
+        },
+        "typography_text_transform": "uppercase",
+        "button_text_color": "#FFFFFF",
+        "background_color": "rgba(0,0,0,0)",
+        "border_color": "#FFFFFF",
+        "hover_color": "#1C1915",
+        "button_background_hover_color": "#FFFFFF",
+        "button_hover_border_color": "#FFFFFF",
+        "_animation": "fadeInUp",
+        "_animation_delay": 600
+       },
+       "elements": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "7b382e4",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "2. Our Valued Clients",
+    "content_width": "boxed",
+    "flex_direction": "row",
+    "padding": {
+     "unit": "px",
+     "top": "26",
+     "right": "40",
+     "bottom": "26",
+     "left": "40",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "boxed_width": {
+     "unit": "px",
+     "size": 1480,
+     "sizes": []
+    },
+    "flex_direction_mobile": "column",
+    "flex_align_items": "center",
+    "flex_align_items_mobile": "flex-start",
+    "flex_gap": {
+     "unit": "px",
+     "size": 48,
+     "column": "48",
+     "row": "48",
+     "isLinked": true
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "24",
+     "right": "20",
+     "bottom": "24",
+     "left": "20",
+     "isLinked": false
+    },
+    "border_border": "solid",
+    "border_width": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "1",
+     "left": "0",
+     "isLinked": false
+    },
+    "border_color": "rgba(28,25,21,0.12)"
+   },
+   "elements": [
+    {
+     "id": "d61aa93",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "Our Valued Clients",
+      "header_size": "h2",
+      "title_color": "#6B635B",
+      "_margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "typography_typography": "custom",
+      "typography_font_family": "Inter",
+      "typography_font_size": {
+       "unit": "px",
+       "size": 12,
+       "sizes": []
+      },
+      "typography_font_weight": "500",
+      "typography_font_size_tablet": {
+       "unit": "px",
+       "size": 12,
+       "sizes": []
+      },
+      "typography_font_size_mobile": {
+       "unit": "px",
+       "size": 12,
+       "sizes": []
+      },
+      "typography_line_height": {
+       "unit": "em",
+       "size": 1.4,
+       "sizes": []
+      },
+      "typography_letter_spacing": {
+       "unit": "px",
+       "size": 2.2,
+       "sizes": []
+      },
+      "typography_text_transform": "uppercase",
+      "_animation": "fadeIn",
+      "_animation_delay": 0
+     },
+     "elements": []
+    },
+    {
+     "id": "23c4171",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Client Logos",
+      "content_width": "full",
+      "flex_direction": "row",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "flex_wrap": "wrap",
+      "flex_align_items": "center",
+      "flex_justify_content": "space-between",
+      "flex_gap": {
+       "unit": "px",
+       "size": 40,
+       "column": "40",
+       "row": "40",
+       "isLinked": true
+      },
+      "width": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "flex_grow": 1
+     },
+     "elements": [
+      {
+       "id": "1db208e",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "image_size": "full",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "px",
+         "size": 140,
+         "sizes": []
+        },
+        "_css_classes": "qag-client",
+        "_title": "Client Logo – Apple",
+        "_animation": "fadeIn",
+        "_animation_delay": 0
+       },
+       "elements": []
+      },
+      {
+       "id": "6deceb9",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "image_size": "full",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "px",
+         "size": 140,
+         "sizes": []
+        },
+        "_css_classes": "qag-client",
+        "_title": "Client Logo – Alaska",
+        "_animation": "fadeIn",
+        "_animation_delay": 100
+       },
+       "elements": []
+      },
+      {
+       "id": "1332a1b",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "image_size": "full",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "px",
+         "size": 140,
+         "sizes": []
+        },
+        "_css_classes": "qag-client",
+        "_title": "Client Logo – ACA",
+        "_animation": "fadeIn",
+        "_animation_delay": 200
+       },
+       "elements": []
+      },
+      {
+       "id": "2c0146b",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "image_size": "full",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "px",
+         "size": 140,
+         "sizes": []
+        },
+        "_css_classes": "qag-client",
+        "_title": "Client Logo – Amazon",
+        "_animation": "fadeIn",
+        "_animation_delay": 300
+       },
+       "elements": []
+      },
+      {
+       "id": "de06ceb",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "image_size": "full",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "px",
+         "size": 140,
+         "sizes": []
+        },
+        "_css_classes": "qag-client",
+        "_title": "Client Logo – Starbucks",
+        "_animation": "fadeIn",
+        "_animation_delay": 400
+       },
+       "elements": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "34c3b7c",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "3. Intro",
+    "content_width": "boxed",
+    "flex_direction": "column",
+    "padding": {
+     "unit": "px",
+     "top": "110",
+     "right": "40",
+     "bottom": "110",
+     "left": "40",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "boxed_width": {
+     "unit": "px",
+     "size": 1320,
+     "sizes": []
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "80",
+     "right": "32",
+     "bottom": "80",
+     "left": "32",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "64",
+     "right": "20",
+     "bottom": "64",
+     "left": "20",
+     "isLinked": false
+    }
+   },
+   "elements": [
+    {
+     "id": "442f7d5",
+     "elType": "widget",
+     "widgetType": "heading",
+     "settings": {
+      "title": "Your one-stop commercial furniture manufacturer and upholstery partner.",
+      "header_size": "h2",
+      "title_color": "#1C1915",
+      "_margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "typography_typography": "custom",
+      "typography_font_family": "Brandon Grotesque",
+      "typography_font_size": {
+       "unit": "px",
+       "size": 52,
+       "sizes": []
+      },
+      "typography_font_weight": "400",
+      "typography_font_size_tablet": {
+       "unit": "px",
+       "size": 40,
+       "sizes": []
+      },
+      "typography_font_size_mobile": {
+       "unit": "px",
+       "size": 30,
+       "sizes": []
+      },
+      "typography_line_height": {
+       "unit": "em",
+       "size": 1.12,
+       "sizes": []
+      },
+      "_animation": "fadeInUp",
+      "_animation_delay": 0
+     },
+     "elements": []
+    },
+    {
+     "id": "5c882b1",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Intro Columns",
+      "content_width": "full",
+      "flex_direction": "row",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "56",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "flex_direction_mobile": "column",
+      "flex_gap": {
+       "unit": "px",
+       "size": 72,
+       "column": "72",
+       "row": "72",
+       "isLinked": true
+      },
+      "flex_align_items": "stretch",
+      "width": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "margin_mobile": {
+       "unit": "px",
+       "top": "36",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      }
+     },
+     "elements": [
+      {
+       "id": "3c4f438",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Intro Photos (follow the open item)",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "css_classes": "qag-intro-media",
+        "width": {
+         "unit": "%",
+         "size": 52,
+         "sizes": []
+        },
+        "width_mobile": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        },
+        "background_background": "classic",
+        "background_color": "#D9D6D2"
+       },
+       "elements": [
+        {
+         "id": "9447ab2",
+         "elType": "widget",
+         "widgetType": "image",
+         "settings": {
+          "image": {
+           "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/06/who-we-serve-2.webp",
+           "id": "",
+           "size": "",
+           "alt": "",
+           "source": "library"
+          },
+          "image_size": "full",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "_title": "Photo 1 – 90 Years",
+          "_animation": "fadeIn",
+          "_animation_delay": 100
+         },
+         "elements": []
+        },
+        {
+         "id": "d699648",
+         "elType": "widget",
+         "widgetType": "image",
+         "settings": {
+          "image": {
+           "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/06/our-work-min-1024x683.webp",
+           "id": "",
+           "size": "",
+           "alt": "",
+           "source": "library"
+          },
+          "image_size": "full",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "_title": "Photo 2 – Simplifying Projects"
+         },
+         "elements": []
+        },
+        {
+         "id": "49dbcd4",
+         "elType": "widget",
+         "widgetType": "image",
+         "settings": {
+          "image": {
+           "url": "https://qagroup.us/mystaging01/wp-content/uploads/2025/09/1758647308724-1024x768.jpg",
+           "id": "",
+           "size": "",
+           "alt": "",
+           "source": "library"
+          },
+          "image_size": "full",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "_title": "Photo 3 – Complete Solutions"
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "9df1547",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Intro Accordion Column",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "%",
+         "size": 48,
+         "sizes": []
+        },
+        "width_mobile": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        }
+       },
+       "elements": [
+        {
+         "id": "17d9af6",
+         "elType": "widget",
+         "widgetType": "nested-accordion",
+         "settings": {
+          "_title": "Intro Accordion",
+          "_css_classes": "qag-intro-acc",
+          "items": [
+           {
+            "item_title": "90 Years of Craftsmanship and Trust",
+            "_id": "2e71efb",
+            "element_css_id": ""
+           },
+           {
+            "item_title": "Simplifying Projects, Bringing Visions to Life",
+            "_id": "3f62f84",
+            "element_css_id": ""
+           },
+           {
+            "item_title": "Complete Solutions, Built to Last",
+            "_id": "cb19b42",
+            "element_css_id": ""
+           }
+          ],
+          "default_state": "expanded",
+          "max_items_expended": "one",
+          "n_accordion_animation_duration": {
+           "unit": "ms",
+           "size": 500,
+           "sizes": []
+          },
+          "accordion_item_title_icon": {
+           "value": "fas fa-plus",
+           "library": "fa-solid"
+          },
+          "accordion_item_title_icon_active": {
+           "value": "fas fa-minus",
+           "library": "fa-solid"
+          },
+          "accordion_item_title_position_horizontal": "stretch",
+          "accordion_item_title_icon_position": "end",
+          "accordion_item_title_space_between": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "accordion_item_title_distance_from_content": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "accordion_background_normal_background": "classic",
+          "accordion_background_normal_color": "rgba(0,0,0,0)",
+          "accordion_border_normal_border": "none",
+          "accordion_padding": {
+           "unit": "px",
+           "top": "24",
+           "right": "0",
+           "bottom": "24",
+           "left": "0",
+           "isLinked": false
+          },
+          "title_typography_typography": "custom",
+          "title_typography_font_family": "Brandon Grotesque",
+          "title_typography_font_size": {
+           "unit": "px",
+           "size": 26,
+           "sizes": []
+          },
+          "title_typography_font_size_tablet": {
+           "unit": "px",
+           "size": 22,
+           "sizes": []
+          },
+          "title_typography_font_size_mobile": {
+           "unit": "px",
+           "size": 20,
+           "sizes": []
+          },
+          "title_typography_font_weight": "400",
+          "normal_title_color": "#1C1915",
+          "hover_title_color": "#534132",
+          "active_title_color": "#1C1915",
+          "icon_size": {
+           "unit": "px",
+           "size": 14,
+           "sizes": []
+          },
+          "icon_color": "#1C1915",
+          "icon_active_color": "#B28B4C",
+          "content_background_background": "classic",
+          "content_background_color": "rgba(0,0,0,0)",
+          "content_border_border": "none",
+          "content_padding": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 150
+         },
+         "elements": [
+          {
+           "id": "1e43bb6",
+           "elType": "container",
+           "isInner": true,
+           "settings": {
+            "_title": "Item: 90 Years of Craftsmanship and Trust",
+            "content_width": "full",
+            "flex_direction": "column",
+            "padding": {
+             "unit": "px",
+             "top": "0",
+             "right": "0",
+             "bottom": "26",
+             "left": "0",
+             "isLinked": false
+            },
+            "margin": {
+             "unit": "px",
+             "top": "0",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": [
+            {
+             "id": "d95a944",
+             "elType": "widget",
+             "widgetType": "text-editor",
+             "settings": {
+              "editor": "<p>QA Group is a nationally trusted commercial furniture manufacturer and upholstery company headquartered in Washington State. With 90 years of experience, we proudly serve upholstery and furniture solutions to restaurants, hospitality groups, and commercial spaces across the United States. What sets us apart is simple – craftsmanship that lasts, precision you can rely on, and service that makes complex projects easier to manage.</p>",
+              "text_color": "#6B635B",
+              "_margin": {
+               "unit": "px",
+               "top": "0",
+               "right": "0",
+               "bottom": "0",
+               "left": "0",
+               "isLinked": false
+              },
+              "typography_typography": "custom",
+              "typography_font_family": "Inter",
+              "typography_font_size": {
+               "unit": "px",
+               "size": 15.5,
+               "sizes": []
+              },
+              "typography_font_weight": "400",
+              "typography_font_size_mobile": {
+               "unit": "px",
+               "size": 15,
+               "sizes": []
+              },
+              "typography_line_height": {
+               "unit": "em",
+               "size": 1.65,
+               "sizes": []
+              }
+             },
+             "elements": []
+            }
+           ]
+          },
+          {
+           "id": "1fac61e",
+           "elType": "container",
+           "isInner": true,
+           "settings": {
+            "_title": "Item: Simplifying Projects, Bringing Visions to Life",
+            "content_width": "full",
+            "flex_direction": "column",
+            "padding": {
+             "unit": "px",
+             "top": "0",
+             "right": "0",
+             "bottom": "26",
+             "left": "0",
+             "isLinked": false
+            },
+            "margin": {
+             "unit": "px",
+             "top": "0",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": [
+            {
+             "id": "724c60b",
+             "elType": "widget",
+             "widgetType": "text-editor",
+             "settings": {
+              "editor": "<p>We believe that every project begins with partnership. Whether you’re designing a new space or refreshing an existing one, our role is to simplify the process and bring your vision to life through customizable furniture and upholstery solutions. From <a href=\"https://qagroup.us/mystaging01/services/\">made-to-order seating to custom upholstery</a>, we offer solutions that protect your investment and keep every space looking its best.</p>",
+              "text_color": "#6B635B",
+              "_margin": {
+               "unit": "px",
+               "top": "0",
+               "right": "0",
+               "bottom": "0",
+               "left": "0",
+               "isLinked": false
+              },
+              "typography_typography": "custom",
+              "typography_font_family": "Inter",
+              "typography_font_size": {
+               "unit": "px",
+               "size": 15.5,
+               "sizes": []
+              },
+              "typography_font_weight": "400",
+              "typography_font_size_mobile": {
+               "unit": "px",
+               "size": 15,
+               "sizes": []
+              },
+              "typography_line_height": {
+               "unit": "em",
+               "size": 1.65,
+               "sizes": []
+              }
+             },
+             "elements": []
+            }
+           ]
+          },
+          {
+           "id": "7131a32",
+           "elType": "container",
+           "isInner": true,
+           "settings": {
+            "_title": "Item: Complete Solutions, Built to Last",
+            "content_width": "full",
+            "flex_direction": "column",
+            "padding": {
+             "unit": "px",
+             "top": "0",
+             "right": "0",
+             "bottom": "26",
+             "left": "0",
+             "isLinked": false
+            },
+            "margin": {
+             "unit": "px",
+             "top": "0",
+             "right": "0",
+             "bottom": "0",
+             "left": "0",
+             "isLinked": false
+            }
+           },
+           "elements": [
+            {
+             "id": "1963c53",
+             "elType": "widget",
+             "widgetType": "text-editor",
+             "settings": {
+              "editor": "<p>With engineered drawings, accurate quotes, and a wide range of finishes and upholstery selections, we make it easy to bring your furniture project together. Our custom furniture capabilities include booths, banquettes, lounge seating, and other furniture built to meet each project’s specifications. And with our warranties and unwavering support, you can count on QA Group to deliver quality, durability, and peace of mind every time.</p>",
+              "text_color": "#6B635B",
+              "_margin": {
+               "unit": "px",
+               "top": "0",
+               "right": "0",
+               "bottom": "0",
+               "left": "0",
+               "isLinked": false
+              },
+              "typography_typography": "custom",
+              "typography_font_family": "Inter",
+              "typography_font_size": {
+               "unit": "px",
+               "size": 15.5,
+               "sizes": []
+              },
+              "typography_font_weight": "400",
+              "typography_font_size_mobile": {
+               "unit": "px",
+               "size": 15,
+               "sizes": []
+              },
+              "typography_line_height": {
+               "unit": "em",
+               "size": 1.65,
+               "sizes": []
+              }
+             },
+             "elements": []
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "beaae40",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "4. Video",
+    "content_width": "boxed",
+    "flex_direction": "column",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "40",
+     "bottom": "110",
+     "left": "40",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "boxed_width": {
+     "unit": "px",
+     "size": 1320,
+     "sizes": []
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "0",
+     "right": "32",
+     "bottom": "80",
+     "left": "32",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "0",
+     "right": "20",
+     "bottom": "64",
+     "left": "20",
+     "isLinked": false
+    }
+   },
+   "elements": [
+    {
+     "id": "6030a18",
+     "elType": "widget",
+     "widgetType": "video",
+     "settings": {
+      "_title": "QA Group Video",
+      "video_type": "youtube",
+      "youtube_url": "https://youtu.be/spQsJei93c4",
+      "aspect_ratio": "219",
+      "aspect_ratio_mobile": "169",
+      "yt_privacy": "yes",
+      "rel": "",
+      "controls": "yes",
+      "show_image_overlay": "yes",
+      "image_overlay": {
+       "url": "https://img.youtube.com/vi/spQsJei93c4/maxresdefault.jpg",
+       "id": "",
+       "size": "",
+       "alt": "",
+       "source": "library"
+      },
+      "show_play_icon": "yes",
+      "play_icon_color": "#FFFFFF",
+      "play_icon_size": {
+       "unit": "px",
+       "size": 72,
+       "sizes": []
+      },
+      "lazy_load": "yes",
+      "_animation": "fadeIn",
+      "_animation_delay": 0
+     },
+     "elements": []
+    }
+   ]
+  },
+  {
+   "id": "257a959",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "5. Who We Serve",
+    "content_width": "boxed",
+    "flex_direction": "column",
+    "padding": {
+     "unit": "px",
+     "top": "110",
+     "right": "40",
+     "bottom": "110",
+     "left": "40",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "boxed_width": {
+     "unit": "px",
+     "size": 1320,
+     "sizes": []
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "80",
+     "right": "32",
+     "bottom": "80",
+     "left": "32",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "64",
+     "right": "20",
+     "bottom": "64",
+     "left": "20",
+     "isLinked": false
+    },
+    "background_background": "classic",
+    "background_color": "#F7F3EE"
+   },
+   "elements": [
+    {
+     "id": "e5cd987",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Who We Serve – Header",
+      "content_width": "full",
+      "flex_direction": "row",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "52",
+       "left": "0",
+       "isLinked": false
+      },
+      "flex_direction_tablet": "column",
+      "flex_align_items": "flex-end",
+      "flex_align_items_tablet": "flex-start",
+      "flex_justify_content": "space-between",
+      "flex_gap": {
+       "unit": "px",
+       "size": 80,
+       "column": "80",
+       "row": "80",
+       "isLinked": true
+      },
+      "flex_gap_tablet": {
+       "unit": "px",
+       "size": 20,
+       "column": "20",
+       "row": "20",
+       "isLinked": true
+      },
+      "width": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "margin_mobile": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "32",
+       "left": "0",
+       "isLinked": false
+      }
+     },
+     "elements": [
+      {
+       "id": "fd7fe40",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Who We Serve",
+        "header_size": "h2",
+        "title_color": "#1C1915",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Brandon Grotesque",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 54,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_tablet": {
+         "unit": "px",
+         "size": 42,
+         "sizes": []
+        },
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 32,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.1,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 0
+       },
+       "elements": []
+      },
+      {
+       "id": "afdc0b9",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>QA Group partners with commercial operators, project teams, and trade professionals across the United States. From independent restaurants to national chains, corporate offices to airport lounges, we deliver seating and upholstery solutions built to your spec, on your schedule, and backed by 90 years of U.S. manufacturing.</p>",
+        "text_color": "#6B635B",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Inter",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 16,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 15,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.65,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 150,
+        "_element_width": "initial",
+        "_element_custom_width": {
+         "unit": "%",
+         "size": 56,
+         "sizes": []
+        },
+        "_element_custom_width_tablet": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        }
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "936c941",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Industry Tiles",
+      "content_width": "full",
+      "flex_direction": "column",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "container_type": "grid",
+      "grid_columns_grid": {
+       "unit": "fr",
+       "size": 4,
+       "sizes": []
+      },
+      "grid_columns_grid_tablet": {
+       "unit": "fr",
+       "size": 2,
+       "sizes": []
+      },
+      "grid_columns_grid_mobile": {
+       "unit": "fr",
+       "size": 2,
+       "sizes": []
+      },
+      "grid_rows_grid": {
+       "unit": "fr",
+       "size": 2,
+       "sizes": []
+      },
+      "grid_rows_grid_tablet": {
+       "unit": "fr",
+       "size": 4,
+       "sizes": []
+      },
+      "grid_rows_grid_mobile": {
+       "unit": "fr",
+       "size": 4,
+       "sizes": []
+      },
+      "grid_gaps": {
+       "unit": "px",
+       "column": "12",
+       "row": "12",
+       "isLinked": true
+      },
+      "grid_gaps_mobile": {
+       "unit": "px",
+       "column": "8",
+       "row": "8",
+       "isLinked": true
+      },
+      "width": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      }
+     },
+     "elements": [
+      {
+       "id": "2025e06",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Tile – Millwork Shops",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "22",
+         "right": "22",
+         "bottom": "20",
+         "left": "22",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "html_tag": "a",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/industries/millwork-casework/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "css_classes": "qag-tile",
+        "min_height": {
+         "unit": "px",
+         "size": 300,
+         "sizes": []
+        },
+        "min_height_tablet": {
+         "unit": "px",
+         "size": 260,
+         "sizes": []
+        },
+        "min_height_mobile": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "flex_justify_content": "flex-end",
+        "padding_mobile": {
+         "unit": "px",
+         "top": "14",
+         "right": "14",
+         "bottom": "14",
+         "left": "14",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "background_image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/06/who-we-serve-1.webp",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "background_position": "center center",
+        "background_size": "cover",
+        "background_repeat": "no-repeat",
+        "background_color": "#D9D6D2",
+        "animation": "fadeIn",
+        "animation_delay": 0
+       },
+       "elements": [
+        {
+         "id": "31e26ba",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Millwork Shops",
+          "header_size": "h3",
+          "title_color": "#FFFFFF",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 150
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "69736bb",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Tile – Foodservice Dealers",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "22",
+         "right": "22",
+         "bottom": "20",
+         "left": "22",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "html_tag": "a",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/industries/foodservice-dealers/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "css_classes": "qag-tile",
+        "min_height": {
+         "unit": "px",
+         "size": 300,
+         "sizes": []
+        },
+        "min_height_tablet": {
+         "unit": "px",
+         "size": 260,
+         "sizes": []
+        },
+        "min_height_mobile": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "flex_justify_content": "flex-end",
+        "padding_mobile": {
+         "unit": "px",
+         "top": "14",
+         "right": "14",
+         "bottom": "14",
+         "left": "14",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "background_image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/06/DanielsBroiler-009-min.webp",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "background_position": "center center",
+        "background_size": "cover",
+        "background_repeat": "no-repeat",
+        "background_color": "#D9D6D2",
+        "animation": "fadeIn",
+        "animation_delay": 80
+       },
+       "elements": [
+        {
+         "id": "1e840b6",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Foodservice Dealers",
+          "header_size": "h3",
+          "title_color": "#FFFFFF",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 230
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "daed60f",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Tile – Architects & Designers",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "22",
+         "right": "22",
+         "bottom": "20",
+         "left": "22",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "html_tag": "a",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/industries/architects-designers/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "css_classes": "qag-tile",
+        "min_height": {
+         "unit": "px",
+         "size": 300,
+         "sizes": []
+        },
+        "min_height_tablet": {
+         "unit": "px",
+         "size": 260,
+         "sizes": []
+        },
+        "min_height_mobile": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "flex_justify_content": "flex-end",
+        "padding_mobile": {
+         "unit": "px",
+         "top": "14",
+         "right": "14",
+         "bottom": "14",
+         "left": "14",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "background_image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/06/who-we-serve-1-scaled.webp",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "background_position": "center center",
+        "background_size": "cover",
+        "background_repeat": "no-repeat",
+        "background_color": "#D9D6D2",
+        "animation": "fadeIn",
+        "animation_delay": 160
+       },
+       "elements": [
+        {
+         "id": "fe2a0a4",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Architects & Designers",
+          "header_size": "h3",
+          "title_color": "#FFFFFF",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 310
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "ee635e2",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Tile – Restaurants",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "22",
+         "right": "22",
+         "bottom": "20",
+         "left": "22",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "html_tag": "a",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/industries/restaurant-chains/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "css_classes": "qag-tile",
+        "min_height": {
+         "unit": "px",
+         "size": 300,
+         "sizes": []
+        },
+        "min_height_tablet": {
+         "unit": "px",
+         "size": 260,
+         "sizes": []
+        },
+        "min_height_mobile": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "flex_justify_content": "flex-end",
+        "padding_mobile": {
+         "unit": "px",
+         "top": "14",
+         "right": "14",
+         "bottom": "14",
+         "left": "14",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "background_image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/10/DanielsBroiler-003.webp",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "background_position": "center center",
+        "background_size": "cover",
+        "background_repeat": "no-repeat",
+        "background_color": "#D9D6D2",
+        "animation": "fadeIn",
+        "animation_delay": 240
+       },
+       "elements": [
+        {
+         "id": "a0d7e5d",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Restaurants",
+          "header_size": "h3",
+          "title_color": "#FFFFFF",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 390
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "b92152b",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Tile – Property Developers",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "22",
+         "right": "22",
+         "bottom": "20",
+         "left": "22",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "html_tag": "a",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/industries/property-developers/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "css_classes": "qag-tile",
+        "min_height": {
+         "unit": "px",
+         "size": 300,
+         "sizes": []
+        },
+        "min_height_tablet": {
+         "unit": "px",
+         "size": 260,
+         "sizes": []
+        },
+        "min_height_mobile": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "flex_justify_content": "flex-end",
+        "padding_mobile": {
+         "unit": "px",
+         "top": "14",
+         "right": "14",
+         "bottom": "14",
+         "left": "14",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "background_image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/06/who-we-serve-3-scaled.webp",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "background_position": "center center",
+        "background_size": "cover",
+        "background_repeat": "no-repeat",
+        "background_color": "#D9D6D2",
+        "animation": "fadeIn",
+        "animation_delay": 0
+       },
+       "elements": [
+        {
+         "id": "e807c86",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Property Developers",
+          "header_size": "h3",
+          "title_color": "#FFFFFF",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 150
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "7f31c4e",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Tile – Hospitality",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "22",
+         "right": "22",
+         "bottom": "20",
+         "left": "22",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "html_tag": "a",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/industries/hospitality/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "css_classes": "qag-tile",
+        "min_height": {
+         "unit": "px",
+         "size": 300,
+         "sizes": []
+        },
+        "min_height_tablet": {
+         "unit": "px",
+         "size": 260,
+         "sizes": []
+        },
+        "min_height_mobile": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "flex_justify_content": "flex-end",
+        "padding_mobile": {
+         "unit": "px",
+         "top": "14",
+         "right": "14",
+         "bottom": "14",
+         "left": "14",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "background_image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/06/47-DSC05619-min-scaled.webp",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "background_position": "center center",
+        "background_size": "cover",
+        "background_repeat": "no-repeat",
+        "background_color": "#D9D6D2",
+        "animation": "fadeIn",
+        "animation_delay": 80
+       },
+       "elements": [
+        {
+         "id": "997b0f5",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Hospitality",
+          "header_size": "h3",
+          "title_color": "#FFFFFF",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 230
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "7cfa37f",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Tile – Corporate",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "22",
+         "right": "22",
+         "bottom": "20",
+         "left": "22",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "html_tag": "a",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/industries/corporate/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "css_classes": "qag-tile",
+        "min_height": {
+         "unit": "px",
+         "size": 300,
+         "sizes": []
+        },
+        "min_height_tablet": {
+         "unit": "px",
+         "size": 260,
+         "sizes": []
+        },
+        "min_height_mobile": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "flex_justify_content": "flex-end",
+        "padding_mobile": {
+         "unit": "px",
+         "top": "14",
+         "right": "14",
+         "bottom": "14",
+         "left": "14",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "background_image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2024/06/IMG_7122-edited-min-scaled.webp",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "background_position": "center center",
+        "background_size": "cover",
+        "background_repeat": "no-repeat",
+        "background_color": "#D9D6D2",
+        "animation": "fadeIn",
+        "animation_delay": 160
+       },
+       "elements": [
+        {
+         "id": "5c0a633",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Corporate",
+          "header_size": "h3",
+          "title_color": "#FFFFFF",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 310
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "99ba40a",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Tile – Aviation",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "22",
+         "right": "22",
+         "bottom": "20",
+         "left": "22",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "html_tag": "a",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/industries/aviation/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "css_classes": "qag-tile",
+        "min_height": {
+         "unit": "px",
+         "size": 300,
+         "sizes": []
+        },
+        "min_height_tablet": {
+         "unit": "px",
+         "size": 260,
+         "sizes": []
+        },
+        "min_height_mobile": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "flex_justify_content": "flex-end",
+        "padding_mobile": {
+         "unit": "px",
+         "top": "14",
+         "right": "14",
+         "bottom": "14",
+         "left": "14",
+         "isLinked": false
+        },
+        "background_background": "classic",
+        "background_image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2026/05/deltaden_centrallounge3-scaled.jpg",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "background_position": "center center",
+        "background_size": "cover",
+        "background_repeat": "no-repeat",
+        "background_color": "#D9D6D2",
+        "animation": "fadeIn",
+        "animation_delay": 240
+       },
+       "elements": [
+        {
+         "id": "29e8e67",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Aviation",
+          "header_size": "h3",
+          "title_color": "#FFFFFF",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 24,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 390
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "e42b06e",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "6. Why Choose QA Group",
+    "content_width": "boxed",
+    "flex_direction": "column",
+    "padding": {
+     "unit": "px",
+     "top": "110",
+     "right": "40",
+     "bottom": "110",
+     "left": "40",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "boxed_width": {
+     "unit": "px",
+     "size": 1320,
+     "sizes": []
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "80",
+     "right": "32",
+     "bottom": "80",
+     "left": "32",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "64",
+     "right": "20",
+     "bottom": "64",
+     "left": "20",
+     "isLinked": false
+    }
+   },
+   "elements": [
+    {
+     "id": "1412f92",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Why – Top",
+      "content_width": "full",
+      "flex_direction": "row",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "flex_direction_mobile": "column",
+      "flex_gap": {
+       "unit": "px",
+       "size": 80,
+       "column": "80",
+       "row": "80",
+       "isLinked": true
+      },
+      "flex_gap_mobile": {
+       "unit": "px",
+       "size": 36,
+       "column": "36",
+       "row": "36",
+       "isLinked": true
+      },
+      "width": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      }
+     },
+     "elements": [
+      {
+       "id": "4dd0eaa",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Why – Copy",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "%",
+         "size": 50,
+         "sizes": []
+        },
+        "width_mobile": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        },
+        "flex_gap": {
+         "unit": "px",
+         "size": 20,
+         "column": "20",
+         "row": "20",
+         "isLinked": true
+        }
+       },
+       "elements": [
+        {
+         "id": "3c731e2",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Why Choose QA Group?",
+          "header_size": "div",
+          "title_color": "#B28B4C",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_font_weight": "500",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1,
+           "sizes": []
+          },
+          "typography_letter_spacing": {
+           "unit": "px",
+           "size": 2.2,
+           "sizes": []
+          },
+          "typography_text_transform": "uppercase",
+          "_animation": "fadeInUp",
+          "_animation_delay": 0
+         },
+         "elements": []
+        },
+        {
+         "id": "d61431d",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Leave it to the upholstery specialists.",
+          "header_size": "h2",
+          "title_color": "#1C1915",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 54,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 42,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 32,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.1,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 100
+         },
+         "elements": []
+        },
+        {
+         "id": "5475e9a",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>QA Group is uniquely positioned to help you complete your next project on time, on budget, and on design – done correctly the first time.</p>",
+          "text_color": "#1C1915",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 20,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.55,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 200
+         },
+         "elements": []
+        },
+        {
+         "id": "af21f05",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Our team and facilities can handle any job scope, from one piece to dozens. We operate specialized departments staffed by experts in frame building, woodworking, sewing, upholstery, wood staining and finishing, as well as product assembly and installation.</p><p>We are problem solvers; clients trust and rely on us to turn their ideas into beautiful yet functional realities. Additionally, our reputation as the pinnacle of quality has made us a top choice for leading design firms and architects. Serving clients nationwide, we offer unparalleled custom upholstery of the highest caliber.</p><p>Clients of QA Group can rely on unmatched attention to detail throughout our extensive range of custom upholstery services. And because our commercial-grade furniture is manufactured right here in the USA, we make sure the job is perfect in every detail from beginning to end.</p>",
+          "text_color": "#6B635B",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 15.5,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.65,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 300
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "d7e8d8d",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Why – Photo",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "%",
+         "size": 50,
+         "sizes": []
+        },
+        "width_mobile": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        }
+       },
+       "elements": [
+        {
+         "id": "fa595f0",
+         "elType": "widget",
+         "widgetType": "image",
+         "settings": {
+          "image": {
+           "url": "https://qagroup.us/mystaging01/wp-content/uploads/2023/01/qagroup-imagebooth-1024x605.webp",
+           "id": "",
+           "size": "",
+           "alt": "",
+           "source": "library"
+          },
+          "image_size": "full",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "_animation": "fadeIn",
+          "_animation_delay": 200
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "9e84db9",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Why – Three Points",
+      "content_width": "full",
+      "flex_direction": "column",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "64",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "container_type": "grid",
+      "grid_columns_grid": {
+       "unit": "fr",
+       "size": 3,
+       "sizes": []
+      },
+      "grid_columns_grid_tablet": {
+       "unit": "fr",
+       "size": 1,
+       "sizes": []
+      },
+      "grid_columns_grid_mobile": {
+       "unit": "fr",
+       "size": 1,
+       "sizes": []
+      },
+      "grid_rows_grid": {
+       "unit": "fr",
+       "size": 1,
+       "sizes": []
+      },
+      "grid_rows_grid_tablet": {
+       "unit": "fr",
+       "size": 3,
+       "sizes": []
+      },
+      "grid_rows_grid_mobile": {
+       "unit": "fr",
+       "size": 3,
+       "sizes": []
+      },
+      "grid_gaps": {
+       "unit": "px",
+       "column": "0",
+       "row": "0",
+       "isLinked": true
+      },
+      "width": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "margin_mobile": {
+       "unit": "px",
+       "top": "40",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      }
+     },
+     "elements": [
+      {
+       "id": "b34a94f",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Point 01 – Reliable Turnaround Times",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "32",
+         "right": "32",
+         "bottom": "8",
+         "left": "0",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "css_classes": "qag-feat",
+        "flex_gap": {
+         "unit": "px",
+         "size": 14,
+         "column": "14",
+         "row": "14",
+         "isLinked": true
+        },
+        "padding_mobile": {
+         "unit": "px",
+         "top": "28",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [
+        {
+         "id": "27bddf0",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "01",
+          "header_size": "div",
+          "title_color": "#B28B4C",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_font_weight": "500",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1,
+           "sizes": []
+          },
+          "typography_letter_spacing": {
+           "unit": "px",
+           "size": 1.4,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 0
+         },
+         "elements": []
+        },
+        {
+         "id": "a0a3839",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Reliable Turnaround Times",
+          "header_size": "h3",
+          "title_color": "#1C1915",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 26,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 22,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 100
+         },
+         "elements": []
+        },
+        {
+         "id": "ae24848",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p><strong>Standard lead time is 6 to 10 weeks</strong>, depending on project size. This timeline begins once we have final drawing approvals or all required materials – whichever is later.</p><p>Production begins only after we’ve received the deposit (if required), confirmed all materials, and obtained customer approval on dimensions and engineering.</p>",
+          "text_color": "#6B635B",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.65,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 200
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "2febd06",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Point 02 – Premium Quality Craftsmanship",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "32",
+         "right": "32",
+         "bottom": "8",
+         "left": "32",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "css_classes": "qag-feat",
+        "flex_gap": {
+         "unit": "px",
+         "size": 14,
+         "column": "14",
+         "row": "14",
+         "isLinked": true
+        },
+        "padding_mobile": {
+         "unit": "px",
+         "top": "28",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [
+        {
+         "id": "fe4c289",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "02",
+          "header_size": "div",
+          "title_color": "#B28B4C",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_font_weight": "500",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1,
+           "sizes": []
+          },
+          "typography_letter_spacing": {
+           "unit": "px",
+           "size": 1.4,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 120
+         },
+         "elements": []
+        },
+        {
+         "id": "e993bed",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Premium Quality Craftsmanship",
+          "header_size": "h3",
+          "title_color": "#1C1915",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 26,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 22,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 220
+         },
+         "elements": []
+        },
+        {
+         "id": "2334e5a",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Attention to detail is ingrained in our ethos. Furthermore, we leave no stone unturned in our commitment to quality upholstery services. Every project undergoes meticulous inspection to prevent any inaccuracies before construction.</p>",
+          "text_color": "#6B635B",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.65,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 320
+         },
+         "elements": []
+        }
+       ]
+      },
+      {
+       "id": "1f10101",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "_title": "Point 03 – Exceptional Customer Service",
+        "content_width": "full",
+        "flex_direction": "column",
+        "padding": {
+         "unit": "px",
+         "top": "32",
+         "right": "32",
+         "bottom": "8",
+         "left": "32",
+         "isLinked": false
+        },
+        "margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "css_classes": "qag-feat",
+        "flex_gap": {
+         "unit": "px",
+         "size": 14,
+         "column": "14",
+         "row": "14",
+         "isLinked": true
+        },
+        "padding_mobile": {
+         "unit": "px",
+         "top": "28",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [
+        {
+         "id": "8a357b0",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "03",
+          "header_size": "div",
+          "title_color": "#B28B4C",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_font_weight": "500",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 12,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1,
+           "sizes": []
+          },
+          "typography_letter_spacing": {
+           "unit": "px",
+           "size": 1.4,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 240
+         },
+         "elements": []
+        },
+        {
+         "id": "f2bd045",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "Exceptional Customer Service",
+          "header_size": "h3",
+          "title_color": "#1C1915",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Brandon Grotesque",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 26,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_tablet": {
+           "unit": "px",
+           "size": 22,
+           "sizes": []
+          },
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 21,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.2,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 340
+         },
+         "elements": []
+        },
+        {
+         "id": "2147ad6",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Your satisfaction is our priority. With a dedicated quality control team and a commitment to transparent, honest practices, we stand behind our work. Make us your trusted partner; our adaptable, flexible solutions are here to support your goals.</p>",
+          "text_color": "#6B635B",
+          "_margin": {
+           "unit": "px",
+           "top": "0",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "typography_typography": "custom",
+          "typography_font_family": "Inter",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_font_weight": "400",
+          "typography_font_size_mobile": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.65,
+           "sizes": []
+          },
+          "_animation": "fadeInUp",
+          "_animation_delay": 440
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b7b0da8",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "7. Chances Are, You've Seen Our Work",
+    "content_width": "boxed",
+    "flex_direction": "row",
+    "padding": {
+     "unit": "px",
+     "top": "110",
+     "right": "40",
+     "bottom": "110",
+     "left": "40",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "boxed_width": {
+     "unit": "px",
+     "size": 1320,
+     "sizes": []
+    },
+    "padding_tablet": {
+     "unit": "px",
+     "top": "80",
+     "right": "32",
+     "bottom": "80",
+     "left": "32",
+     "isLinked": false
+    },
+    "padding_mobile": {
+     "unit": "px",
+     "top": "64",
+     "right": "20",
+     "bottom": "64",
+     "left": "20",
+     "isLinked": false
+    },
+    "flex_direction_mobile": "column",
+    "flex_gap": {
+     "unit": "px",
+     "size": 96,
+     "column": "96",
+     "row": "96",
+     "isLinked": true
+    },
+    "flex_gap_mobile": {
+     "unit": "px",
+     "size": 40,
+     "column": "40",
+     "row": "40",
+     "isLinked": true
+    },
+    "background_background": "classic",
+    "background_color": "#2B221B"
+   },
+   "elements": [
+    {
+     "id": "8e8d349",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Work – Intro",
+      "content_width": "full",
+      "flex_direction": "column",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "width": {
+       "unit": "%",
+       "size": 33,
+       "sizes": []
+      },
+      "width_mobile": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "flex_gap": {
+       "unit": "px",
+       "size": 24,
+       "column": "24",
+       "row": "24",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "8e40ee3",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Chances are, you've seen our work.",
+        "header_size": "h2",
+        "title_color": "#FFFFFF",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Brandon Grotesque",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 54,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_tablet": {
+         "unit": "px",
+         "size": 42,
+         "sizes": []
+        },
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 32,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.1,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 0
+       },
+       "elements": []
+      },
+      {
+       "id": "461b2ef",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>We have spent nearly a century building our quality reputation in the Pacific Northwest and across the country.</p>",
+        "text_color": "rgba(255,255,255,0.72)",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Inter",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 16,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 15,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.65,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 150
+       },
+       "elements": []
+      },
+      {
+       "id": "dc6d556",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "https://qagroup.us/mystaging01/wp-content/uploads/2025/05/Brand-Guide-Illustation-Drawing-Icon-Sketches-08-1-1024x512.png",
+         "id": "",
+         "size": "",
+         "alt": "",
+         "source": "library"
+        },
+        "image_size": "full",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "width": {
+         "unit": "px",
+         "size": 340,
+         "sizes": []
+        },
+        "_css_classes": "qag-work-illo",
+        "_animation": "fadeIn",
+        "_animation_delay": 300
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "d4a1be9",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "Work – List",
+      "content_width": "full",
+      "flex_direction": "column",
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "width": {
+       "unit": "%",
+       "size": 67,
+       "sizes": []
+      },
+      "width_mobile": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      }
+     },
+     "elements": [
+      {
+       "id": "91b6815",
+       "elType": "widget",
+       "widgetType": "icon-list",
+       "settings": {
+        "_title": "Project List (20)",
+        "_css_classes": "qag-work-list",
+        "view": "traditional",
+        "icon_list": [
+         {
+          "text": "Academy Museum of Motion Pictures",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "c586749"
+         },
+         {
+          "text": "Alaska Airlines Lounges",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "b1aaac7"
+         },
+         {
+          "text": "Amazon Headquarters",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "0b8d5e0"
+         },
+         {
+          "text": "Bill and Melinda Gates Foundation",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "ec63532"
+         },
+         {
+          "text": "Brooks Running Headquarters",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "b5ff645"
+         },
+         {
+          "text": "Climate Pledge Arena",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "560a6fc"
+         },
+         {
+          "text": "Columbia Center",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "3bf3faf"
+         },
+         {
+          "text": "Facebook Headquarters",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "fcc5541"
+         },
+         {
+          "text": "Federal Reserve",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "1e2f460"
+         },
+         {
+          "text": "Golden State Warriors",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "6fb8edf"
+         },
+         {
+          "text": "Google Headquarters",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "932a473"
+         },
+         {
+          "text": "Microsoft Headquarters",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "4238e19"
+         },
+         {
+          "text": "Nordstrom Marketplace",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "7ec75f0"
+         },
+         {
+          "text": "Publicis Sapient",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "cbb93ea"
+         },
+         {
+          "text": "Space Needle",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "c82a8f3"
+         },
+         {
+          "text": "Starbucks Headquarters",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "fe36207"
+         },
+         {
+          "text": "Texas A&M",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "2941f3c"
+         },
+         {
+          "text": "Top Golf",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "552df63"
+         },
+         {
+          "text": "University of California",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "e5fbe40"
+         },
+         {
+          "text": "University of Washington",
+          "selected_icon": {
+           "value": "",
+           "library": ""
+          },
+          "_id": "cda450e"
+         }
+        ],
+        "space_between": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "text_color": "#FFFFFF",
+        "text_indent": {
+         "unit": "px",
+         "size": 0,
+         "sizes": []
+        },
+        "icon_typography_typography": "custom",
+        "icon_typography_font_family": "Brandon Grotesque",
+        "icon_typography_font_size": {
+         "unit": "px",
+         "size": 20,
+         "sizes": []
+        },
+        "icon_typography_font_size_tablet": {
+         "unit": "px",
+         "size": 18,
+         "sizes": []
+        },
+        "icon_typography_font_size_mobile": {
+         "unit": "px",
+         "size": 17,
+         "sizes": []
+        },
+        "icon_typography_font_weight": "400",
+        "icon_typography_line_height": {
+         "unit": "em",
+         "size": 1.3,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 200
+       },
+       "elements": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "062d213",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "_title": "8. CTA",
+    "content_width": "full",
+    "flex_direction": "row",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "flex_direction_mobile": "column",
+    "flex_gap": {
+     "unit": "px",
+     "size": 0,
+     "column": "0",
+     "row": "0",
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "2a7cf85",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "CTA – Estimate",
+      "content_width": "full",
+      "flex_direction": "column",
+      "padding": {
+       "unit": "px",
+       "top": "104",
+       "right": "56",
+       "bottom": "104",
+       "left": "80",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "width": {
+       "unit": "%",
+       "size": 50,
+       "sizes": []
+      },
+      "width_mobile": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "flex_gap": {
+       "unit": "px",
+       "size": 14,
+       "column": "14",
+       "row": "14",
+       "isLinked": true
+      },
+      "flex_align_items": "flex-start",
+      "padding_tablet": {
+       "unit": "px",
+       "top": "72",
+       "right": "32",
+       "bottom": "72",
+       "left": "32",
+       "isLinked": false
+      },
+      "padding_mobile": {
+       "unit": "px",
+       "top": "56",
+       "right": "20",
+       "bottom": "56",
+       "left": "20",
+       "isLinked": false
+      },
+      "background_background": "classic",
+      "background_color": "#534132"
+     },
+     "elements": [
+      {
+       "id": "c2c9339",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "Ready to kick off a project?",
+        "header_size": "h2",
+        "title_color": "#FFFFFF",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Brandon Grotesque",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 42,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_tablet": {
+         "unit": "px",
+         "size": 34,
+         "sizes": []
+        },
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 28,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.15,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 0
+       },
+       "elements": []
+      },
+      {
+       "id": "76250ff",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>Begin your estimate here.</p>",
+        "text_color": "#FFFFFF",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "14",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Inter",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 16,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 15,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.6,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 100
+       },
+       "elements": []
+      },
+      {
+       "id": "4d45817",
+       "elType": "widget",
+       "widgetType": "button",
+       "settings": {
+        "text": "Get An Estimate",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/contact/estimate/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "size": "md",
+        "selected_icon": {
+         "value": "fas fa-arrow-right",
+         "library": "fa-solid"
+        },
+        "icon_align": "right",
+        "icon_indent": {
+         "unit": "px",
+         "size": 10,
+         "sizes": []
+        },
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "1",
+         "bottom": "1",
+         "left": "1",
+         "isLinked": false
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "text_padding": {
+         "unit": "px",
+         "top": "16",
+         "right": "28",
+         "bottom": "16",
+         "left": "28",
+         "isLinked": false
+        },
+        "hover_animation": "",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Inter",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 13,
+         "sizes": []
+        },
+        "typography_font_weight": "500",
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 12,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1,
+         "sizes": []
+        },
+        "typography_letter_spacing": {
+         "unit": "px",
+         "size": 1.6,
+         "sizes": []
+        },
+        "typography_text_transform": "uppercase",
+        "button_text_color": "#FFFFFF",
+        "background_color": "rgba(0,0,0,0)",
+        "border_color": "#FFFFFF",
+        "hover_color": "#1C1915",
+        "button_background_hover_color": "#FFFFFF",
+        "button_hover_border_color": "#FFFFFF",
+        "_animation": "fadeInUp",
+        "_animation_delay": 200
+       },
+       "elements": []
+      }
+     ]
+    },
+    {
+     "id": "7777d3d",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "_title": "CTA – Contact",
+      "content_width": "full",
+      "flex_direction": "column",
+      "padding": {
+       "unit": "px",
+       "top": "104",
+       "right": "80",
+       "bottom": "104",
+       "left": "56",
+       "isLinked": false
+      },
+      "margin": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "width": {
+       "unit": "%",
+       "size": 50,
+       "sizes": []
+      },
+      "width_mobile": {
+       "unit": "%",
+       "size": 100,
+       "sizes": []
+      },
+      "flex_gap": {
+       "unit": "px",
+       "size": 14,
+       "column": "14",
+       "row": "14",
+       "isLinked": true
+      },
+      "flex_align_items": "flex-start",
+      "padding_tablet": {
+       "unit": "px",
+       "top": "72",
+       "right": "32",
+       "bottom": "72",
+       "left": "32",
+       "isLinked": false
+      },
+      "padding_mobile": {
+       "unit": "px",
+       "top": "56",
+       "right": "20",
+       "bottom": "56",
+       "left": "20",
+       "isLinked": false
+      },
+      "background_background": "classic",
+      "background_color": "#E9DDD0"
+     },
+     "elements": [
+      {
+       "id": "5a3935e",
+       "elType": "widget",
+       "widgetType": "heading",
+       "settings": {
+        "title": "We love meeting new people.",
+        "header_size": "h2",
+        "title_color": "#1C1915",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Brandon Grotesque",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 42,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_tablet": {
+         "unit": "px",
+         "size": 34,
+         "sizes": []
+        },
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 28,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.15,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 150
+       },
+       "elements": []
+      },
+      {
+       "id": "4d76fb7",
+       "elType": "widget",
+       "widgetType": "text-editor",
+       "settings": {
+        "editor": "<p>If you would like to work with us, get started here.</p>",
+        "text_color": "#1C1915",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "14",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Inter",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 16,
+         "sizes": []
+        },
+        "typography_font_weight": "400",
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 15,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1.6,
+         "sizes": []
+        },
+        "_animation": "fadeInUp",
+        "_animation_delay": 250
+       },
+       "elements": []
+      },
+      {
+       "id": "76c30ce",
+       "elType": "widget",
+       "widgetType": "button",
+       "settings": {
+        "text": "Contact Us",
+        "link": {
+         "url": "https://qagroup.us/mystaging01/contact/",
+         "is_external": "",
+         "nofollow": "",
+         "custom_attributes": ""
+        },
+        "size": "md",
+        "selected_icon": {
+         "value": "fas fa-arrow-right",
+         "library": "fa-solid"
+        },
+        "icon_align": "right",
+        "icon_indent": {
+         "unit": "px",
+         "size": 10,
+         "sizes": []
+        },
+        "border_border": "solid",
+        "border_width": {
+         "unit": "px",
+         "top": "1",
+         "right": "1",
+         "bottom": "1",
+         "left": "1",
+         "isLinked": false
+        },
+        "border_radius": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "text_padding": {
+         "unit": "px",
+         "top": "16",
+         "right": "28",
+         "bottom": "16",
+         "left": "28",
+         "isLinked": false
+        },
+        "hover_animation": "",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        },
+        "typography_typography": "custom",
+        "typography_font_family": "Inter",
+        "typography_font_size": {
+         "unit": "px",
+         "size": 13,
+         "sizes": []
+        },
+        "typography_font_weight": "500",
+        "typography_font_size_mobile": {
+         "unit": "px",
+         "size": 12,
+         "sizes": []
+        },
+        "typography_line_height": {
+         "unit": "em",
+         "size": 1,
+         "sizes": []
+        },
+        "typography_letter_spacing": {
+         "unit": "px",
+         "size": 1.6,
+         "sizes": []
+        },
+        "typography_text_transform": "uppercase",
+        "button_text_color": "#1C1915",
+        "background_color": "rgba(0,0,0,0)",
+        "border_color": "#1C1915",
+        "hover_color": "#FFFFFF",
+        "button_background_hover_color": "#1C1915",
+        "button_hover_border_color": "#1C1915",
+        "_animation": "fadeInUp",
+        "_animation_delay": 350
+       },
+       "elements": []
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
