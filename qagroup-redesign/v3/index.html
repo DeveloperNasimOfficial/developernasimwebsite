@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commercial Furniture Manufacturer &amp; Upholsterer | QA Group</title>
+<!--
+  QA Group homepage: layout concept, round 3 (compact).
+  Only the copy, links and images that are on the staging homepage today. Nothing reworded, nothing added.
+  Brand: Deep Brown #534132, Golden Mustard #D4B858, Brandon Grotesque headings, Garamond body. See REVIEW-NOTES.md.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Brandon Grotesque";font-style:normal;font-weight:390;font-display:swap;src:url('https://qagroup.us/mystaging01/wp-content/uploads/fonts/brandon-grotesque-regular.ttf') format('truetype');}
+:root{
+  --brown:#534132;--brown-deep:#2e241c;--mustard:#D4B858;
+  --ink:#1d1a17;--text:#4d4741;--muted:#8a8178;
+  --paper:#f6f2ec;--line:rgba(29,26,23,.13);--line-l:rgba(255,255,255,.14);--ph:#d8d3cc;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --wrap:1320px;--g:clamp(20px,4vw,56px);--sec:clamp(56px,6.5vw,96px);
+  --sans:"Brandon Grotesque","Jost",system-ui,sans-serif;
+  --serif:"adobe-garamond-pro","EB Garamond",Garamond,Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--text);font:400 18px/1.6 var(--serif);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-family:var(--sans);font-weight:390;color:var(--ink);line-height:1.1}
+p{margin:0}ul{margin:0;padding:0;list-style:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--g)}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font:400 12px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--brown)}
+.eyebrow::before{content:"";width:8px;height:8px;background:var(--mustard)}
+.ph{background:var(--ph);overflow:hidden;position:relative}
+.ph img{width:100%;height:100%;object-fit:cover;color:transparent}
+img.is-broken{visibility:hidden}
+.h2{font-size:clamp(30px,3.2vw,46px);letter-spacing:-.005em}
+
+.btn{display:inline-flex;align-items:center;gap:14px;padding:16px 26px;white-space:nowrap;font:400 12.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;background:var(--brown);color:#fff;border:1px solid var(--brown);transition:background .4s var(--ease),color .4s,border-color .4s}
+.btn:hover{background:var(--brown-deep);border-color:var(--brown-deep)}
+.btn svg{width:18px;height:10px;transition:transform .4s var(--ease)}
+.btn:hover svg{transform:translateX(5px)}
+.btn--line{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.btn--line:hover{background:#fff;color:var(--ink);border-color:#fff}
+.btn--mustard{background:var(--mustard);border-color:var(--mustard);color:var(--ink)}
+.btn--mustard:hover{background:#e3c96d;border-color:#e3c96d}
+
+/* ===== header ===== */
+.hdr{position:fixed;inset:0 0 auto;z-index:60;color:#fff;transition:background .5s var(--ease),color .5s,box-shadow .5s}
+.hdr .wrap{max-width:1440px;display:flex;align-items:center;gap:32px;height:84px;transition:height .5s var(--ease)}
+.hdr.is-solid{background:#fff;color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.hdr.is-solid .wrap{height:68px}
+.logo{display:flex;align-items:center;height:40px;flex:none}
+.logo img{height:100%;width:auto;transition:filter .5s}
+.hdr.is-solid .logo img{filter:brightness(0) saturate(100%) invert(24%) sepia(14%) saturate(1200%) hue-rotate(347deg) brightness(92%)}
+.logo span{display:none;font:390 21px/1 var(--sans);letter-spacing:.24em}
+.logo.no-img img{display:none}.logo.no-img span{display:block}
+.nav{display:flex;margin-left:auto}
+.nav>li{position:relative}
+.nav>li>a{display:block;padding:14px 13px;font:400 12.5px/1 var(--sans);letter-spacing:.15em;text-transform:uppercase;white-space:nowrap;position:relative}
+.nav>li>a::after{content:"";position:absolute;left:13px;right:13px;bottom:6px;height:1px;background:var(--mustard);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.nav>li:hover>a::after{transform:scaleX(1)}
+.dd{position:absolute;top:100%;left:0;min-width:290px;padding:12px 0;background:#fff;color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.12);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s}
+.dd--2{display:grid;grid-template-columns:1fr 1fr;min-width:470px}
+.nav>li:hover .dd,.nav>li:focus-within .dd{opacity:1;visibility:visible;transform:none}
+.dd a{display:block;padding:9px 22px;font:400 16px/1.35 var(--serif);transition:color .25s,padding .35s var(--ease)}
+.dd a:hover{color:var(--brown);padding-left:28px}
+.hdr .btn{padding:13px 20px;margin-left:8px}
+.hdr:not(.is-solid) .btn{background:transparent;border-color:rgba(255,255,255,.55)}
+.hdr:not(.is-solid) .btn:hover{background:#fff;color:var(--ink)}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border:0;background:none;color:inherit;position:relative;cursor:pointer}
+.burger span{position:absolute;left:10px;right:10px;height:1px;background:currentColor;transition:transform .4s var(--ease)}
+.burger span:nth-child(1){top:17px}.burger span:nth-child(2){top:27px}
+.menu-open .burger span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.menu-open .burger span:nth-child(2){transform:translateY(-5px) rotate(-45deg)}
+.menu-open .hdr{background:#fff;color:var(--ink)}
+.drawer{position:fixed;inset:0;z-index:55;background:#fff;color:var(--ink);padding:96px var(--g) 40px;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.menu-open .drawer{opacity:1;visibility:visible}
+.drawer>a,.drawer summary{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font:390 21px/1.2 var(--sans);list-style:none;cursor:pointer}
+.drawer summary::-webkit-details-marker{display:none}
+.drawer summary::after{content:"+";transition:transform .3s}
+.drawer details[open] summary::after{transform:rotate(45deg)}
+.drawer details ul{padding:6px 0 14px}
+.drawer details a{display:block;padding:7px 0 7px 16px;font-size:17px;color:var(--text)}
+.drawer .btn{margin-top:28px}
+
+/* ===== 1. hero ===== */
+.hero{position:relative;height:100vh;height:100svh;min-height:560px;max-height:1000px;overflow:hidden;color:#fff;background:var(--brown-deep)}
+.hero__s{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+.hero__s.on{opacity:1}
+.hero__s img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform 7s linear}
+.hero__s.on img{transform:scale(1.1)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.38) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 48%,rgba(0,0,0,.66) 100%)}
+.hero__in{position:absolute;z-index:2;left:0;right:0;bottom:0}
+.hero__in .wrap{max-width:1440px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;padding-bottom:clamp(36px,6vh,72px)}
+.hero h1{color:#fff;font-size:clamp(34px,4.3vw,64px);line-height:1.03;max-width:16ch}
+.hero p{margin-top:20px;max-width:46ch;font-size:clamp(17px,1.3vw,20px);line-height:1.5;color:rgba(255,255,255,.88);font-style:italic}
+.hero .btn{margin-top:28px}
+.hero__txt>*{opacity:0;transform:translateY(28px);animation:rise 1.2s var(--ease) forwards}
+.hero__txt>*:nth-child(2){animation-delay:.18s}.hero__txt>*:nth-child(3){animation-delay:.36s}
+@keyframes rise{to{opacity:1;transform:none}}
+.hero__nav{display:flex;align-items:center;gap:16px;font:400 12px/1 var(--sans);letter-spacing:.2em;flex:none}
+.hero__nav b{font-weight:400;color:var(--mustard)}
+.hero__bars{display:flex;gap:6px}
+.hero__bars button{width:44px;height:17px;border:0;padding:0;cursor:pointer;background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.35)) center/100% 1px no-repeat;position:relative}
+.hero__bars button::after{content:"";position:absolute;left:0;right:0;top:8px;height:1px;background:#fff;transform:scaleX(0);transform-origin:left}
+.hero__bars button.on::after{animation:bar 6s linear forwards}
+@keyframes bar{to{transform:scaleX(1)}}
+
+/* ===== 2. clients strip ===== */
+.clients{border-bottom:1px solid var(--line)}
+.clients .wrap{display:flex;align-items:center;gap:clamp(24px,4vw,56px);height:104px}
+.clients h2{flex:none;font:400 11.5px/1.4 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.clients__row{flex:1;display:flex;justify-content:space-between;align-items:center;gap:24px;min-width:0}
+.clients__row img{max-height:40px;width:auto;max-width:18%;filter:grayscale(1);opacity:.6;transition:filter .4s,opacity .4s}
+.clients__row img:hover{filter:none;opacity:1}
+.clients__row .lp{flex:1;max-width:110px;height:34px;background:var(--ph)}
+
+/* ===== 3. intro: heading + video, then tabbed stories ===== */
+.intro{padding:var(--sec) 0}
+.intro__top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:end}
+.vid{position:relative;aspect-ratio:16/9;background:#111 url("https://img.youtube.com/vi/spQsJei93c4/maxresdefault.jpg") center/cover no-repeat;cursor:pointer;overflow:hidden}
+.vid::before{content:"";position:absolute;inset:0;background:rgba(20,15,10,.3);transition:background .5s}
+.vid:hover::before{background:rgba(20,15,10,.15)}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+.vid button{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;gap:18px;border:0;background:none;color:#fff;cursor:pointer;font:400 12px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase}
+.vid i{width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,255,255,.75);display:grid;place-items:center;transition:background .4s var(--ease),border-color .4s,transform .5s var(--ease)}
+.vid i svg{width:16px;height:16px;margin-left:3px;fill:#fff;transition:fill .3s}
+.vid:hover i{background:var(--mustard);border-color:var(--mustard);transform:scale(1.06)}
+.vid:hover i svg{fill:var(--ink)}
+.tabs{margin-top:clamp(40px,4.5vw,64px)}
+.tabs__list{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.tabs__list button{position:relative;display:flex;gap:16px;align-items:baseline;padding:22px 24px 22px 0;border:0;background:none;text-align:left;cursor:pointer;color:var(--muted);transition:color .3s}
+.tabs__list button::before{content:"";position:absolute;left:0;right:24px;top:-1px;height:2px;background:var(--brown);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+.tabs__list button.on{color:var(--ink)}
+.tabs__list button.on::before{transform:scaleX(1)}
+.tabs__list span{font:400 12px/1 var(--sans);letter-spacing:.16em;color:var(--mustard)}
+.tabs__list h3{font-size:clamp(17px,1.5vw,22px);color:inherit;transition:color .3s}
+.tabs__list button:hover{color:var(--ink)}
+.tabs__panels{position:relative;display:grid}
+.panel{grid-area:1/1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center;opacity:0;visibility:hidden;transition:opacity .6s var(--ease),visibility .6s}
+.panel.on{opacity:1;visibility:visible}
+.panel .ph{aspect-ratio:16/10}
+.panel .ph img{transform:scale(1.05);transition:transform 1.4s var(--ease)}
+.panel.on .ph img{transform:none}
+.panel p{font-size:19px;line-height:1.65;transform:translateY(14px);transition:transform .8s var(--ease)}
+.panel.on p{transform:none}
+.panel p a{color:var(--brown);background:linear-gradient(var(--mustard),var(--mustard)) 0 100%/100% 1px no-repeat}
+.panel__h{display:none}
+
+/* ===== 4. who we serve ===== */
+.serve{padding:var(--sec) 0;background:var(--paper)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(28px,3.5vw,44px)}
+.head p{font-size:18px;line-height:1.6;max-width:62ch}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tile{position:relative;aspect-ratio:5/4;overflow:hidden;background:var(--ph);color:#fff}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.66) 100%);transition:background .5s}
+.tile:hover img{transform:scale(1.07)}
+.tile:hover::after{background:linear-gradient(180deg,rgba(46,36,28,.1) 0%,rgba(46,36,28,.82) 100%)}
+.tile h3{position:absolute;z-index:2;left:20px;right:48px;bottom:18px;color:#fff;font-size:clamp(17px,1.45vw,21px)}
+.tile i{position:absolute;z-index:2;right:18px;bottom:20px;width:18px;height:10px;opacity:0;transform:translateX(-8px);transition:opacity .35s,transform .45s var(--ease)}
+.tile i::before{content:"";position:absolute;inset:4px 0 auto;height:1px;background:var(--mustard)}
+.tile i::after{content:"";position:absolute;right:0;top:1px;width:7px;height:7px;border-top:1px solid var(--mustard);border-right:1px solid var(--mustard);transform:rotate(45deg)}
+.tile:hover i{opacity:1;transform:none}
+
+/* ===== 5. why choose ===== */
+.why{padding:var(--sec) 0}
+.why__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px)}
+.why h2{margin:16px 0 20px}
+.why__lead{font-size:clamp(19px,1.5vw,22px);line-height:1.45;color:var(--ink);font-style:italic;margin-bottom:20px}
+.why__body p{font-size:16.5px;line-height:1.6}
+.why__body p+p{margin-top:12px}
+.why .ph{aspect-ratio:1024/605;margin-bottom:8px}
+.pts li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;padding:20px 0;border-bottom:1px solid var(--line)}
+.pts span{font:400 12px/1.9 var(--sans);letter-spacing:.14em;color:var(--mustard)}
+.pts h3{font-size:clamp(19px,1.5vw,22px);margin-bottom:8px}
+.pts p{font-size:16px;line-height:1.55}
+.pts p+p{margin-top:6px}
+.pts strong{color:var(--ink);font-weight:500}
+
+/* ===== 6. seen our work ===== */
+.work{background:var(--brown-deep);color:rgba(255,255,255,.72);padding:var(--sec) 0}
+.work__grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(32px,5vw,80px);align-items:start}
+.work h2{color:#fff;margin-bottom:18px}
+.work p{font-size:18px;font-style:italic;max-width:34ch}
+.work__illo{width:230px;margin-top:28px;filter:invert(1) brightness(1.7) sepia(.3);mix-blend-mode:screen;opacity:.8}
+.work ul{display:grid;grid-template-columns:repeat(3,1fr);column-gap:28px;border-top:1px solid var(--line-l)}
+.work li{display:flex;gap:12px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line-l);transition:color .3s}
+.work li::before{content:attr(data-n);font:400 10.5px/1 var(--sans);letter-spacing:.1em;color:var(--mustard);flex:none;width:18px}
+.work li:hover{color:#fff}
+.work h4{font:400 16.5px/1.35 var(--serif);color:inherit}
+
+/* ===== 7. cta ===== */
+.cta{display:grid;grid-template-columns:1fr 1fr}
+.cta__p{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(40px,4.5vw,64px) var(--g)}
+.cta__p:first-child{background:var(--paper);padding-left:max(var(--g),calc((100vw - var(--wrap))/2 + var(--g)))}
+.cta__p:last-child{background:var(--brown);color:#fff;padding-right:max(var(--g),calc((100vw - var(--wrap))/2 + var(--g)))}
+.cta__p:last-child h2{color:#fff}
+.cta h2{font-size:clamp(23px,2.1vw,32px);margin-bottom:8px}
+.cta p{font-size:17px;font-style:italic}
+.cta .btn{flex:none}
+
+/* ===== footer ===== */
+.ftr{background:#191410;color:rgba(255,255,255,.62);padding:clamp(52px,5.5vw,80px) 0 26px;font-size:16.5px}
+.ftr__top{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:clamp(32px,5vw,80px)}
+.ftr .logo{height:46px;margin-bottom:22px;color:#fff}
+.ftr__about p{max-width:40ch}
+.ftr h4{font:400 11.5px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#fff;margin-bottom:20px}
+.ftr ul{columns:2;column-gap:24px}
+.ftr li{padding:4px 0}
+.ftr a:hover{color:var(--mustard)}
+.social{display:flex;gap:10px;margin-top:24px}
+.social a{width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;transition:background .3s,border-color .3s,color .3s}
+.social a:hover{background:var(--mustard);border-color:var(--mustard);color:var(--ink)}
+.social svg{width:15px;height:15px;fill:currentColor}
+.form-ph{margin-top:16px;height:96px;border:1px dashed rgba(255,255,255,.22);display:grid;place-items:center;font:400 11px/1 var(--sans);letter-spacing:.16em;color:rgba(255,255,255,.35)}
+.ftr__bottom{margin-top:clamp(40px,5vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font:400 12px/1 var(--sans);letter-spacing:.14em;color:rgba(255,255,255,.4)}
+
+/* ===== reveal ===== */
+.rv{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* ===== responsive ===== */
+@media (max-width:1240px){.nav,.hdr .btn{display:none}.burger{display:block}}
+@media (max-width:960px){
+  .intro__top,.head,.why__grid,.work__grid{grid-template-columns:1fr}
+  .tabs__list{display:none}
+  .panel{grid-area:auto;opacity:1;visibility:visible;grid-template-columns:1fr;gap:16px;padding:28px 0;border-top:1px solid var(--line)}
+  .panel .ph img,.panel p{transform:none}
+  .panel__h{display:flex;gap:14px;align-items:baseline}
+  .panel__h span{font:400 12px/1 var(--sans);letter-spacing:.16em;color:var(--mustard)}
+  .panel__h h3{font-size:22px}
+  .tiles{grid-template-columns:repeat(2,1fr);gap:8px}
+  .work ul{grid-template-columns:repeat(2,1fr)}
+  .cta{grid-template-columns:1fr}
+  .cta__p{flex-direction:column;align-items:flex-start}
+  .cta__p:first-child,.cta__p:last-child{padding-left:var(--g);padding-right:var(--g)}
+  .ftr__top{grid-template-columns:1fr}
+  .hero__in .wrap{flex-direction:column;align-items:flex-start}
+  .clients .wrap{flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;height:auto;padding-top:24px;padding-bottom:24px}
+  .clients__row{width:100%}
+}
+@media (max-width:560px){
+  body{font-size:17px}
+  .tile h3{left:14px;bottom:12px;font-size:16px}
+  .work ul{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv,.hero__txt>*{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="https://qagroup.us/mystaging01/" aria-label="QA Group"><img src="../assets/QA-Group-Logo-Primary-White-1.png.webp" alt="" onerror="this.parentNode.classList.add('no-img')"><span>QA GROUP</span></a>
+    <ul class="nav">
+      <li><a href="https://qagroup.us/mystaging01/about/">About Us</a></li>
+      <li><a href="https://qagroup.us/mystaging01/services/">Our Services</a>
+        <div class="dd">
+          <a href="https://qagroup.us/mystaging01/services/">Custom Upholstery Services</a>
+          <a href="https://qagroup.us/services/upholstered-acoustic-wall-panels/">Upholstered Acoustic Wall Panels</a>
+          <a href="https://qagroup.us/mystaging01/services/commercial-drapery/">Commercial Drapery &amp; Window Treatments</a>
+          <a href="https://qagroup.us/mystaging01/services/booth-and-banquette-upholstery/">Custom Booths &amp; Banquettes</a>
+          <a href="https://qagroup.us/mystaging01/services/customizable-booth-seating/">Customizable Booths</a>
+          <a href="https://qagroup.us/mystaging01/services/upholstered-cushion-panels/">Upholstered Cushion Panels</a>
+          <a href="https://qagroup.us/mystaging01/reupholstery/">Regional Reupholstery Services</a>
+        </div>
+      </li>
+      <li><a href="https://qagroup.us/mystaging01/commercial-furniture-products/">Commercial Furniture Products</a></li>
+      <li><a href="https://qagroup.us/mystaging01/industries/">Industries We Serve</a>
+        <div class="dd dd--2">
+          <a href="https://qagroup.us/mystaging01/industries/general-contractors/">General Contractors</a>
+          <a href="https://qagroup.us/mystaging01/industries/millwork-casework/">Millwork Shops</a>
+          <a href="https://qagroup.us/mystaging01/industries/architects-designers/">Architects &amp; Designers</a>
+          <a href="https://qagroup.us/mystaging01/industries/property-developers/">Property Developers &amp; Owners</a>
+          <a href="https://qagroup.us/mystaging01/industries/foodservice-dealers/">Foodservice Dealers</a>
+          <a href="https://qagroup.us/mystaging01/industries/restaurant-chains/">Restaurants</a>
+          <a href="https://qagroup.us/mystaging01/industries/restaurant-chains/">Restaurant Chains</a>
+          <a href="https://qagroup.us/mystaging01/industries/hospitality/">Hospitality</a>
+          <a href="https://qagroup.us/mystaging01/industries/corporate/">Corporate</a>
+          <a href="https://qagroup.us/mystaging01/industries/aviation/">Aviation</a>
+        </div>
+      </li>
+      <li><a href="https://qagroup.us/mystaging01/resources/">Resource Hub</a>
+        <div class="dd" style="min-width:200px">
+          <a href="https://qagroup.us/mystaging01/services/portfolio/">Case Studies</a>
+          <a href="https://qagroup.us/mystaging01/blog/">Blog</a>
+        </div>
+      </li>
+      <li><a href="https://qagroup.us/mystaging01/contact/">Contact Us</a></li>
+    </ul>
+    <a class="btn" href="https://qagroup.us/mystaging01/contact/estimate-request/">Get An Estimate</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="drawer" aria-label="Mobile">
+  <a href="https://qagroup.us/mystaging01/about/">About Us</a>
+  <details><summary>Our Services</summary><ul>
+    <li><a href="https://qagroup.us/mystaging01/services/">Custom Upholstery Services</a></li>
+    <li><a href="https://qagroup.us/services/upholstered-acoustic-wall-panels/">Upholstered Acoustic Wall Panels</a></li>
+    <li><a href="https://qagroup.us/mystaging01/services/commercial-drapery/">Commercial Drapery &amp; Window Treatments</a></li>
+    <li><a href="https://qagroup.us/mystaging01/services/booth-and-banquette-upholstery/">Custom Booths &amp; Banquettes</a></li>
+    <li><a href="https://qagroup.us/mystaging01/services/customizable-booth-seating/">Customizable Booths</a></li>
+    <li><a href="https://qagroup.us/mystaging01/services/upholstered-cushion-panels/">Upholstered Cushion Panels</a></li>
+    <li><a href="https://qagroup.us/mystaging01/reupholstery/">Regional Reupholstery Services</a></li>
+  </ul></details>
+  <a href="https://qagroup.us/mystaging01/commercial-furniture-products/">Commercial Furniture Products</a>
+  <details><summary>Industries We Serve</summary><ul>
+    <li><a href="https://qagroup.us/mystaging01/industries/general-contractors/">General Contractors</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/millwork-casework/">Millwork Shops</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/architects-designers/">Architects &amp; Designers</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/property-developers/">Property Developers &amp; Owners</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/foodservice-dealers/">Foodservice Dealers</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/restaurant-chains/">Restaurants</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/restaurant-chains/">Restaurant Chains</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/hospitality/">Hospitality</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/corporate/">Corporate</a></li>
+    <li><a href="https://qagroup.us/mystaging01/industries/aviation/">Aviation</a></li>
+  </ul></details>
+  <details><summary>Resource Hub</summary><ul>
+    <li><a href="https://qagroup.us/mystaging01/services/portfolio/">Case Studies</a></li>
+    <li><a href="https://qagroup.us/mystaging01/blog/">Blog</a></li>
+  </ul></details>
+  <a href="https://qagroup.us/mystaging01/contact/">Contact Us</a>
+  <a class="btn" href="https://qagroup.us/mystaging01/contact/estimate-request/">Get An Estimate</a>
+</nav>
+
+<main>
+
+<!-- 1. HERO: Sechrist-style slider, message bottom-left -->
+<section class="hero">
+  <div class="hero__s on"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/05/homepage-slideshow-1-min.webp" alt="Commercial Furniture and Custom Upholstery"></div>
+  <div class="hero__s"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/05/homepage-slideshow-4-min.webp" alt="Commercial Furniture and Custom Upholstery" loading="lazy"></div>
+  <div class="hero__s"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/05/homepage-slideshow-3-min.webp" alt="Commercial Furniture and Custom Upholstery" loading="lazy"></div>
+  <div class="hero__in"><div class="wrap">
+    <div class="hero__txt">
+      <h1>Could custom furniture be designed to meet society’s changing standards?</h1>
+      <p>Architectural upholstery has the power to unite and inspire. Can we measure comfort and quality per square foot?</p>
+      <a class="btn btn--line" href="https://qagroup.us/mystaging01/services/portfolio/">View Our Portfolio <svg viewBox="0 0 18 10" fill="none" stroke="currentColor"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
+    </div>
+    <div class="hero__nav"><span><b id="hn">01</b> / 03</span><div class="hero__bars" id="hb"></div></div>
+  </div></div>
+</section>
+
+<!-- 2. CLIENTS: credibility immediately after the opening -->
+<section class="clients">
+  <div class="wrap">
+    <h2>Our Valued Clients</h2>
+    <div class="clients__row" id="clients"></div>
+  </div>
+</section>
+
+<!-- 3. INTRO: heading + video side by side (CCS), the three stories as tabs -->
+<section class="intro">
+  <div class="wrap">
+    <div class="intro__top">
+      <h2 class="h2 rv">Your one-stop commercial furniture manufacturer and upholstery partner.</h2>
+      <div class="vid rv d1" id="vid" data-yt="spQsJei93c4"><button aria-label="Watch qa group"><i><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></i>Watch qa group</button></div>
+    </div>
+    <div class="tabs rv">
+      <div class="tabs__list" role="tablist">
+        <button class="on" role="tab"><span>01</span><h3>90 Years of Craftsmanship and Trust</h3></button>
+        <button role="tab"><span>02</span><h3>Simplifying Projects, Bringing Visions to Life</h3></button>
+        <button role="tab"><span>03</span><h3>Complete Solutions, Built to Last</h3></button>
+      </div>
+      <div class="tabs__panels">
+        <div class="panel on">
+          <div class="panel__h"><span>01</span><h3>90 Years of Craftsmanship and Trust</h3></div>
+          <div class="ph"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/06/who-we-serve-2.webp" alt="Commercial Furniture and Custom Upholstery" loading="lazy"></div>
+          <p>QA Group is a nationally trusted commercial furniture manufacturer and upholstery company headquartered in Washington State. With 90 years of experience, we proudly serve upholstery and furniture solutions to restaurants, hospitality groups, and commercial spaces across the United States. What sets us apart is simple – craftsmanship that lasts, precision you can rely on, and service that makes complex projects easier to manage.</p>
+        </div>
+        <div class="panel">
+          <div class="panel__h"><span>02</span><h3>Simplifying Projects, Bringing Visions to Life</h3></div>
+          <div class="ph"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/06/our-work-min-1024x683.webp" alt="Commercial Furniture and Custom Upholstery" loading="lazy"></div>
+          <p>We believe that every project begins with partnership. Whether you’re designing a new space or refreshing an existing one, our role is to simplify the process and bring your vision to life through customizable furniture and upholstery solutions. From <a href="https://qagroup.us/mystaging01/services/">made-to-order seating to custom upholstery</a>, we offer solutions that protect your investment and keep every space looking its best.</p>
+        </div>
+        <div class="panel">
+          <div class="panel__h"><span>03</span><h3>Complete Solutions, Built to Last</h3></div>
+          <div class="ph"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2025/09/1758647308724-1024x768.jpg" alt="" loading="lazy"></div>
+          <p>With engineered drawings, accurate quotes, and a wide range of finishes and upholstery selections, we make it easy to bring your furniture project together. Our custom furniture capabilities include booths, banquettes, lounge seating, and other furniture built to meet each project’s specifications. And with our warranties and unwavering support, you can count on QA Group to deliver quality, durability, and peace of mind every time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. WHO WE SERVE -->
+<section class="serve">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="h2 rv">Who We Serve</h2>
+      <p class="rv d1">QA Group partners with commercial operators, project teams, and trade professionals across the United States. From independent restaurants to national chains, corporate offices to airport lounges, we deliver seating and upholstery solutions built to your spec, on your schedule, and backed by 90 years of U.S. manufacturing.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile rv" href="https://qagroup.us/mystaging01/industries/millwork-casework/"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/06/who-we-serve-1.webp" alt="" loading="lazy"><h3>Millwork Shops</h3><i></i></a>
+      <a class="tile rv d1" href="https://qagroup.us/mystaging01/industries/foodservice-dealers/"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/06/DanielsBroiler-009-min.webp" alt="" loading="lazy"><h3>Foodservice Dealers</h3><i></i></a>
+      <a class="tile rv d2" href="https://qagroup.us/mystaging01/industries/architects-designers/"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/06/who-we-serve-1-scaled.webp" alt="" loading="lazy"><h3>Architects &amp; Designers</h3><i></i></a>
+      <a class="tile rv d3" href="https://qagroup.us/mystaging01/industries/restaurant-chains/"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/10/DanielsBroiler-003.webp" alt="" loading="lazy"><h3>Restaurants</h3><i></i></a>
+      <a class="tile rv" href="https://qagroup.us/mystaging01/industries/property-developers/"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/06/who-we-serve-3-scaled.webp" alt="" loading="lazy"><h3>Property Developers</h3><i></i></a>
+      <a class="tile rv d1" href="https://qagroup.us/mystaging01/industries/hospitality/"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/06/47-DSC05619-min-scaled.webp" alt="" loading="lazy"><h3>Hospitality</h3><i></i></a>
+      <a class="tile rv d2" href="https://qagroup.us/mystaging01/industries/corporate/"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2024/06/IMG_7122-edited-min-scaled.webp" alt="" loading="lazy"><h3>Corporate</h3><i></i></a>
+      <a class="tile rv d3" href="https://qagroup.us/mystaging01/industries/aviation/"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2026/05/deltaden_centrallounge3-scaled.jpg" alt="" loading="lazy"><h3>Aviation</h3><i></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. WHY CHOOSE QA GROUP -->
+<section class="why">
+  <div class="wrap why__grid">
+    <div>
+      <div class="rv"><span class="eyebrow">Why Choose QA Group?</span></div>
+      <h2 class="h2 rv d1">Leave it to the upholstery specialists.</h2>
+      <p class="why__lead rv d2">QA Group is uniquely positioned to help you complete your next project on time, on budget, and on design – done correctly the first time.</p>
+      <div class="why__body rv d2">
+        <p>Our team and facilities can handle any job scope, from one piece to dozens. We operate specialized departments staffed by experts in frame building, woodworking, sewing, upholstery, wood staining and finishing, as well as product assembly and installation.</p>
+        <p>We are problem solvers; clients trust and rely on us to turn their ideas into beautiful yet functional realities. Additionally, our reputation as the pinnacle of quality has made us a top choice for leading design firms and architects. Serving clients nationwide, we offer unparalleled custom upholstery of the highest caliber.</p>
+        <p>Clients of QA Group can rely on unmatched attention to detail throughout our extensive range of custom upholstery services. And because our commercial-grade furniture is manufactured right here in the USA, we make sure the job is perfect in every detail from beginning to end.</p>
+      </div>
+    </div>
+    <div>
+      <div class="ph rv d1"><img src="https://qagroup.us/mystaging01/wp-content/uploads/2023/01/qagroup-imagebooth-1024x605.webp" alt="Commercial Furniture and Custom Upholstery" loading="lazy"></div>
+      <ul class="pts">
+        <li class="rv"><span>01</span><div><h3>Reliable Turnaround Times</h3><p><strong>Standard lead time is 6 to 10 weeks</strong>, depending on project size. This timeline begins once we have final drawing approvals or all required materials – whichever is later.</p><p>Production begins only after we’ve received the deposit (if required), confirmed all materials, and obtained customer approval on dimensions and engineering.</p></div></li>
+        <li class="rv d1"><span>02</span><div><h3>Premium Quality Craftsmanship</h3><p>Attention to detail is ingrained in our ethos. Furthermore, we leave no stone unturned in our commitment to quality upholstery services. Every project undergoes meticulous inspection to prevent any inaccuracies before construction.</p></div></li>
+        <li class="rv d2"><span>03</span><div><h3>Exceptional Customer Service</h3><p>Your satisfaction is our priority. With a dedicated quality control team and a commitment to transparent, honest practices, we stand behind our work. Make us your trusted partner; our adaptable, flexible solutions are here to support your goals.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CHANCES ARE, YOU'VE SEEN OUR WORK -->
+<section class="work">
+  <div class="wrap work__grid">
+    <div>
+      <h2 class="h2 rv">Chances are, you've seen our work.</h2>
+      <p class="rv d1">We have spent nearly a century building our quality reputation in the Pacific Northwest and across the country.</p>
+      <img class="work__illo rv d2" src="https://qagroup.us/mystaging01/wp-content/uploads/2025/05/Brand-Guide-Illustation-Drawing-Icon-Sketches-08-1-1024x512.png" alt="Scissors and thread with sewing tools illustration." loading="lazy">
+    </div>
+    <ul class="rv d1" id="projects">
+      <li><h4>Academy Museum of Motion Pictures</h4></li>
+      <li><h4>Alaska Airlines Lounges</h4></li>
+      <li><h4>Amazon Headquarters</h4></li>
+      <li><h4>Bill and Melinda Gates Foundation</h4></li>
+      <li><h4>Brooks Running Headquarters</h4></li>
+      <li><h4>Climate Pledge Arena</h4></li>
+      <li><h4>Columbia Center</h4></li>
+      <li><h4>Facebook Headquarters</h4></li>
+      <li><h4>Federal Reserve</h4></li>
+      <li><h4>Golden State Warriors</h4></li>
+      <li><h4>Google Headquarters</h4></li>
+      <li><h4>Microsoft Headquarters</h4></li>
+      <li><h4>Nordstrom Marketplace</h4></li>
+      <li><h4>Publicis Sapient</h4></li>
+      <li><h4>Space Needle</h4></li>
+      <li><h4>Starbucks Headquarters</h4></li>
+      <li><h4>Texas A&amp;M</h4></li>
+      <li><h4>Top Golf</h4></li>
+      <li><h4>University of California</h4></li>
+      <li><h4>University of Washington</h4></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 7. CTA -->
+<section class="cta">
+  <div class="cta__p rv">
+    <div><h2>Ready to kick off a project?</h2><p>Begin your estimate here.</p></div>
+    <a class="btn" href="https://qagroup.us/mystaging01/contact/estimate/">Get An Estimate <svg viewBox="0 0 18 10" fill="none" stroke="currentColor"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
+  </div>
+  <div class="cta__p rv d1">
+    <div><h2>We love meeting new people.</h2><p>If you would like to work with us, get started here.</p></div>
+    <a class="btn btn--mustard" href="https://qagroup.us/mystaging01/contact/">Contact Us <svg viewBox="0 0 18 10" fill="none" stroke="currentColor"><path d="M0 5h17M13 1l4 4-4 4"/></svg></a>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__top">
+      <div class="ftr__about">
+        <a class="logo" href="https://qagroup.us/mystaging01/" aria-label="QA Group"><img src="../assets/QA-Group-Logo-Primary-White-1.png.webp" alt="" onerror="this.parentNode.classList.add('no-img')"><span>QA GROUP</span></a>
+        <p>Trusted since 1936, QA Group delivers custom upholstery and commercial furniture solutions built to last. We combine craftsmanship, precision, and service to make every project simple and successful.</p>
+        <div class="social">
+          <a href="https://www.linkedin.com/company/3489743" aria-label="Linkedin"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.86V21H9z"/></svg></a>
+          <a href="https://www.instagram.com/qagroupfurnituresolutions/" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 3.25.15 4.77 1.7 4.92 4.92.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85C2.42 3.93 3.94 2.42 7.15 2.27 8.42 2.2 8.8 2.2 12 2.2zm0 4.65a5.15 5.15 0 100 10.3 5.15 5.15 0 000-10.3zm0 8.5a3.35 3.35 0 110-6.7 3.35 3.35 0 010 6.7zm5.35-9.9a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z"/></svg></a>
+          <a href="https://www.pinterest.com/qagroupfurnituresolutions/" aria-label="Pinterest"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.64 19.31c-.09-.79-.17-2 .03-2.86l1.17-4.97s-.3-.6-.3-1.48c0-1.39.81-2.43 1.81-2.43.86 0 1.27.64 1.27 1.41 0 .86-.55 2.15-.83 3.34-.24 1 .5 1.81 1.48 1.81 1.78 0 3.14-1.87 3.14-4.58 0-2.39-1.72-4.06-4.17-4.06-2.84 0-4.51 2.13-4.51 4.34 0 .86.33 1.78.74 2.28.08.1.09.19.07.29l-.28 1.13c-.04.18-.15.22-.34.13-1.25-.58-2.03-2.41-2.03-3.88 0-3.16 2.3-6.07 6.62-6.07 3.48 0 6.18 2.48 6.18 5.79 0 3.45-2.18 6.23-5.2 6.23-1.01 0-1.97-.53-2.3-1.15l-.62 2.38c-.23.87-.84 1.96-1.25 2.62A10 10 0 1012 2z"/></svg></a>
+          <a href="https://www.facebook.com/qagroupsea/" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8.2h2.75l.42-3.2H13.5V8.56c0-.93.26-1.56 1.59-1.56h1.7V4.14A22.6 22.6 0 0014.31 4c-2.45 0-4.13 1.5-4.13 4.25v2.35H7.4v3.2h2.78V22z"/></svg></a>
+          <a href="https://www.youtube.com/channel/UCvW9SBgQDa20RkL7GCj1yMw" aria-label="Youtube"><svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 00-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 001 7.2 31 31 0 00.5 12 31 31 0 001 16.8a3 3 0 002.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 002.1-2.1 31 31 0 00.5-4.8 31 31 0 00-.5-4.8zM9.75 15.02V8.98L15.5 12z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="https://qagroup.us/mystaging01/services/portfolio">Case Studies</a></li>
+          <li><a href="https://qagroup.us/mystaging01/services/project-process">Project Timeline</a></li>
+          <li><a href="https://qagroup.us/mystaging01/services/customize/">Customization Options</a></li>
+          <li><a href="https://qagroup.us/mystaging01/resources/sustainability/">Sustainability Statement</a></li>
+          <li><a href="https://qagroup.us/mystaging01/blog">Educational Blogs</a></li>
+          <li><a href="https://legacycompaniesportal.com/careers/">Careers</a></li>
+          <li><a href="https://qagroup.us/mystaging01/resources/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="https://qagroup.us/mystaging01/contact/">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <p>Subscribe for bimonthly updates on projects, products, and industry insights.</p>
+        <div class="form-ph">NEWSLETTER FORM (EXISTING EMBED)</div>
+      </div>
+    </div>
+    <div class="ftr__bottom">© QA Group 2026</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.addEventListener('error',function(e){if(e.target.tagName==='IMG')e.target.classList.add('is-broken')},true);
+
+  var hdr=document.getElementById('hdr');
+  function onScroll(){hdr.classList.toggle('is-solid',window.scrollY>window.innerHeight*.7)}
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  var burger=document.getElementById('burger');
+  burger.addEventListener('click',function(){var o=document.body.classList.toggle('menu-open');burger.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});
+
+  // hero slider
+  var sl=[].slice.call(document.querySelectorAll('.hero__s')),hb=document.getElementById('hb'),hn=document.getElementById('hn'),c=0,t;
+  var bs=sl.map(function(_,i){var b=document.createElement('button');b.setAttribute('aria-label','Slide '+(i+1));b.onclick=function(){go(i)};hb.appendChild(b);return b});
+  function go(i){sl[c].classList.remove('on');bs[c].classList.remove('on');c=i;sl[c].classList.add('on');void bs[c].offsetWidth;bs[c].classList.add('on');hn.textContent='0'+(c+1);clearTimeout(t);t=setTimeout(function(){go((c+1)%sl.length)},6000)}
+  go(0);
+
+  // client logos (same five files as staging)
+  var row=document.getElementById('clients');
+  ['client-apple','client-alaska','client-aca','client-amazon','client-starbucks'].forEach(function(n){
+    var im=new Image();im.src='../assets/'+n+'.webp';im.alt='Commercial Furniture and Custom Upholstery';
+    im.onerror=function(){var d=document.createElement('span');d.className='lp';im.replaceWith(d)};row.appendChild(im);
+  });
+
+  // intro tabs
+  var tabs=[].slice.call(document.querySelectorAll('.tabs__list button')),panels=[].slice.call(document.querySelectorAll('.panel'));
+  tabs.forEach(function(b,i){b.addEventListener('click',function(){
+    tabs.forEach(function(x,j){x.classList.toggle('on',j===i);x.setAttribute('aria-selected',j===i)});
+    panels.forEach(function(p,j){p.classList.toggle('on',j===i)});
+  })});
+
+  // video
+  var v=document.getElementById('vid');
+  v.addEventListener('click',function(){if(v.querySelector('iframe'))return;var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+v.dataset.yt+'?autoplay=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.title='QA Group';v.appendChild(f);v.querySelector('button').remove()});
+
+  // number the project list
+  document.querySelectorAll('#projects li').forEach(function(li,i){li.dataset.n=('0'+(i+1)).slice(-2)});
+
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
